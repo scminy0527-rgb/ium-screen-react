@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.figma.com)",
+      "mcp__figma-remote-mcp__get_design_context",
+      "Bash(npx react-scripts *)",
+      "mcp__figma-remote-mcp__get_screenshot"
+    ]
+  }
+}
