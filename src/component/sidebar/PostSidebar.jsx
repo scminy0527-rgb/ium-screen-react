@@ -1,12 +1,14 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import RelatedPostCard from './RelatedPostCard';
-import NoticeItem from './NoticeItem';
-import { colors, fonts, radius, layout } from '../../styles/theme';
+import React from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import RelatedPostCard from "./RelatedPostCard";
+import NoticeItem from "./NoticeItem";
+import { colors, fonts, radius, layout } from "../../styles/themeOriginal";
 
-const authorProfileImg = 'https://www.figma.com/api/mcp/asset/c2cb9995-4cdf-4fcb-97c9-8a6c124289ab';
-const defaultPostIcon = 'https://www.figma.com/api/mcp/asset/020e0f66-1d95-461e-9604-907bd4d5c27d';
+const authorProfileImg =
+  "https://www.figma.com/api/mcp/asset/c2cb9995-4cdf-4fcb-97c9-8a6c124289ab";
+const defaultPostIcon =
+  "https://www.figma.com/api/mcp/asset/020e0f66-1d95-461e-9604-907bd4d5c27d";
 
 /* ── Layout ── */
 const Wrapper = styled.div`
@@ -32,7 +34,9 @@ const BackButton = styled.button`
   width: 100%;
   cursor: pointer;
   white-space: nowrap;
-  transition: border-color 0.2s, color 0.2s;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
 
   &:hover {
     border-color: ${colors.primary};
@@ -173,7 +177,9 @@ const OutlineButton = styled.button`
   width: 100%;
   cursor: pointer;
   white-space: nowrap;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
 
   &:hover {
     background: ${colors.primaryLight};
@@ -233,21 +239,45 @@ const NoticeList = styled.div`
 `;
 
 const MOCK_RELATED_POSTS = [
-  { id: 1, title: '수어 자음 20개 한번에 정리!', description: '헷갈리는 것만 모았어요', likes: 1, comments: 1 },
-  { id: 2, title: '연관 게시글 2', description: '헷갈리는 것만 모았어요', likes: 1, comments: 1 },
-  { id: 3, title: '연관 게시글 3', description: '헷갈리는 것만 모았어요', likes: 1, comments: 1 },
-  { id: 4, title: '연관 게시글 4', description: '헷갈리는 것만 모았어요', likes: 1, comments: 1 },
+  {
+    id: 1,
+    title: "수어 자음 20개 한번에 정리!",
+    description: "헷갈리는 것만 모았어요",
+    likes: 1,
+    comments: 1,
+  },
+  {
+    id: 2,
+    title: "연관 게시글 2",
+    description: "헷갈리는 것만 모았어요",
+    likes: 1,
+    comments: 1,
+  },
+  {
+    id: 3,
+    title: "연관 게시글 3",
+    description: "헷갈리는 것만 모았어요",
+    likes: 1,
+    comments: 1,
+  },
+  {
+    id: 4,
+    title: "연관 게시글 4",
+    description: "헷갈리는 것만 모았어요",
+    likes: 1,
+    comments: 1,
+  },
 ];
 
 const MOCK_NOTICES = [
-  { id: 1, title: '2025 수어 챌린지 이벤트 안내', date: '3/8' },
-  { id: 2, title: '커뮤니티 이용 규칙 업데이트', date: '3/8' },
+  { id: 1, title: "2025 수어 챌린지 이벤트 안내", date: "3/8" },
+  { id: 2, title: "커뮤니티 이용 규칙 업데이트", date: "3/8" },
 ];
 
 const PostSidebar = ({
-  authorName = '수어러버김지민',
+  authorName = "수어러버김지민",
   authorAvatar = authorProfileImg,
-  authorLevel = 'Lv.7 · 열공러',
+  authorLevel = "Lv.7 · 열공러",
   authorPosts = 42,
   authorLikes = 128,
   authorStreak = 30,
@@ -309,7 +339,11 @@ const PostSidebar = ({
         <NoticeTitleText>공지사항</NoticeTitleText>
         <NoticeList>
           {notices.map((notice) => (
-            <NoticeItem key={notice.id} title={notice.title} date={notice.date} />
+            <NoticeItem
+              key={notice.id}
+              title={notice.title}
+              date={notice.date}
+            />
           ))}
         </NoticeList>
       </NoticeCard>

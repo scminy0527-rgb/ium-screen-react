@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import CommentItem from './CommentItem';
-import { colors, fonts, radius } from '../../styles/theme';
+import React, { useState } from "react";
+import styled from "styled-components";
+import CommentItem from "./CommentItem";
+import { colors, fonts, radius } from "../../styles/themeOriginal";
 
-const profileImg1 = 'https://www.figma.com/api/mcp/asset/c2cb9995-4cdf-4fcb-97c9-8a6c124289ab';
-const profileImg2 = 'https://www.figma.com/api/mcp/asset/491962d2-cd51-4e18-a625-fd4324bdaeec';
-const defaultAvatarImg = 'https://www.figma.com/api/mcp/asset/cb1e934a-35f4-4b63-abf6-44baea169a05';
+const profileImg1 =
+  "https://www.figma.com/api/mcp/asset/c2cb9995-4cdf-4fcb-97c9-8a6c124289ab";
+const profileImg2 =
+  "https://www.figma.com/api/mcp/asset/491962d2-cd51-4e18-a625-fd4324bdaeec";
+const defaultAvatarImg =
+  "https://www.figma.com/api/mcp/asset/cb1e934a-35f4-4b63-abf6-44baea169a05";
 
 const Wrapper = styled.div`
   display: flex;
@@ -101,71 +104,71 @@ const MOCK_COMMENTS = [
   {
     id: 1,
     avatar: defaultAvatarImg,
-    authorName: '영상러이소희',
+    authorName: "영상러이소희",
     isAuthor: false,
     isReply: false,
     lines: [
-      '저도 지금 도전 중인데 이 글 보고 너무 힘이 나요!! 감사합니다 💕',
-      '영상도 꼭 올려주세요! 기다릴게요 📹',
+      "저도 지금 도전 중인데 이 글 보고 너무 힘이 나요!! 감사합니다 💕",
+      "영상도 꼭 올려주세요! 기다릴게요 📹",
     ],
     likes: 1,
     replies: 1,
-    time: '2시간 전',
+    time: "2시간 전",
     showAccessibility: true,
   },
   {
     id: 2,
     avatar: profileImg2,
-    authorName: '댓글 작성 유저',
+    authorName: "댓글 작성 유저",
     isAuthor: false,
     isReply: false,
     lines: [
-      '저도 지금 도전 중인데 이 글 보고 너무 힘이 나요!! 감사합니다 💕',
-      '영상도 꼭 올려주세요! 기다릴게요 📹ㅇㅇ',
+      "저도 지금 도전 중인데 이 글 보고 너무 힘이 나요!! 감사합니다 💕",
+      "영상도 꼭 올려주세요! 기다릴게요 📹ㅇㅇ",
     ],
     likes: 1,
     replies: 1,
-    time: '2시간 전',
+    time: "2시간 전",
     showAccessibility: true,
   },
   {
     id: 3,
     avatar: profileImg1,
-    authorName: '게시글 작성자 (글 작성자)',
+    authorName: "게시글 작성자 (글 작성자)",
     isAuthor: true,
     isReply: true,
     lines: [
-      '저도 지금 도전 중인데 이 글 보고 너무 힘이 나요!! 감사합니다 💕',
-      '영상도 꼭 올려주세요! 기다릴게요 📹ㅇㅇ',
+      "저도 지금 도전 중인데 이 글 보고 너무 힘이 나요!! 감사합니다 💕",
+      "영상도 꼭 올려주세요! 기다릴게요 📹ㅇㅇ",
     ],
     likes: 1,
     replies: 1,
-    time: '2시간 전',
+    time: "2시간 전",
     showAccessibility: true,
   },
   {
     id: 4,
     avatar: defaultAvatarImg,
-    authorName: '영상러이소희',
+    authorName: "영상러이소희",
     isAuthor: false,
     isReply: false,
     lines: [
-      '저도 지금 도전 중인데 이 글 보고 너무 힘이 나요!! 감사합니다 💕',
-      '영상도 꼭 올려주세요! 기다릴게요 📹',
+      "저도 지금 도전 중인데 이 글 보고 너무 힘이 나요!! 감사합니다 💕",
+      "영상도 꼭 올려주세요! 기다릴게요 📹",
     ],
     likes: 1,
     replies: 1,
-    time: '2시간 전',
+    time: "2시간 전",
     showAccessibility: true,
   },
 ];
 
 const CommentSection = ({ commentCount = 247, comments = MOCK_COMMENTS }) => {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
 
   const handleSubmit = () => {
     if (!inputValue.trim()) return;
-    setInputValue('');
+    setInputValue("");
   };
 
   return (

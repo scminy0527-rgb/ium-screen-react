@@ -1,105 +1,113 @@
-export const colors = {
-  // 키 컬러 (브랜드)
-  primary: '#4359fc',
-  primaryDark: '#0014a9',
-  primaryLight: '#eef1ff',
-  primaryMid: '#7b8fff',
-  primaryFooter: '#4157ff',
+// UI / UX 가이드에 따른 디자인 토큰 정의
+const theme = {};
 
-  // 그래디언트
-  gradientMain: 'linear-gradient(162.3deg, #0014a9 0%, #4359fc 100%)',
-  gradientCard: 'linear-gradient(160.58deg, #4359fc 0%, #7b8fff 100%)',
-  gradientProfile: 'linear-gradient(169.69deg, #4359fc 0%, #6478fd 100%)',
-  gradientAccessibility: 'linear-gradient(90deg, #eef1ff 34%, #e8f9e9 100%)',
+// ─────────────────────────────────────────
+// COLOR
+// ─────────────────────────────────────────
 
-  // 텍스트
-  textMain: '#333333',
-  textSub: '#9ca3af',
-  textWhite: '#ffffff',
-  textWhiteSubtle: 'rgba(255, 255, 255, 0.85)',
-
-  // 컬러 배경 위 오버레이 (PostContent 헤더 태그 등)
-  tagOnPrimary: 'rgba(255, 255, 255, 0.2)',
-  tagOnPrimaryBorder: 'rgba(255, 255, 255, 0.4)',
-
-  // 배경
-  bgPage: '#f0f2f5',
-  bgCard: '#ffffff',
-  bgSection: '#f9fafb',
-  bgThumbnail: '#f2f2f2',
-
-  // 보더
-  border: '#e5e7eb',
-  footerDivider: '#42464c',
-  footerSocialBorder: '#33373c',
-
-  // 텍스트 확장
-  textDark: '#4b5563',
-
-  // 신고/차단 색상
-  orange: '#ff8004',
-  orangeBg: '#fff7ed',
-  orangeDark: '#92400e',
-
-  // 상태 색상
-  live: '#129d1b',
-  liveBg: '#e8f9e9',
-  danger: '#f14141',
-  accessibilitySign: '#4359fc',
-  accessibilitySignBg: '#eef1ff',
-  accessibilityRead: '#4dc953',
-  accessibilityReadBg: '#e8f9e9',
-
-  // 팝업 채팅방 전용
-  purple: '#b63fde',
-  purpleBg: '#e1beec',
-  tagOrangeLightBg: '#fff3e8',
-  dangerOverlay: 'rgba(255, 80, 80, 0.5)',
-  overlayWhite15: 'rgba(255, 255, 255, 0.15)',
-  bgPopupOverlay: '#8e8d8d',
-};
-
-export const fonts = {
-  family: "'Pretendard', sans-serif",
-  weight: {
-    regular: 400,
-    medium: 500,
-    bold: 700,
+// Brand Colors
+theme.PALETTE = {
+  primary: {
+    light:      "#A7B5FF",  // Primary Light
+    main:       "#4359FC",  // Primary
+    dark:       "#0014A9",  // Primary Dark
+    extraLight: "#EEF1FF",  // Extra Light Blue
   },
-  size: {
-    xs: '10px',
-    sm: '12px',
-    smMd: '13px',
-    md: '14px',
-    mdLg: '15px',
-    base: '16px',
-    lg: '18px',
-    xl: '20px',
-    xxl: '24px',
-    xxxl: '28px',
+  secondary: {
+    main:  "#129D1B",       // Secondary (green)
+    light: "#AAE5AE",       // Secondary Light
   },
+  third: {
+    main:  "#B63FDE",       // Third (purple)
+    light: "#E1BEEC",       // Third Light
+  },
+  warning: {
+    main:  "#FF8004",       // Warning (orange)
+    light: "#FFCE9F",       // Warning Light
+  },
+  fourth: {
+    main:  "#FFCB38",       // Fourth (yellow)
+    light: "#FFE086",       // Fourth Light
+  },
+  red:   "#F14141",         // Primary Red
+  white: "#FFFFFF",
+  black: "#222222",
 };
 
-export const radius = {
-  pill: '100px',
-  card: '20px',
-  button: '12px',
-  input: '8px',
-  sm: '10px',
+// Gradient Colors
+theme.GRADIENT = {
+  lightBlue: "linear-gradient(135deg, #A7B5FF 0%, #4359FC 100%)",
+  deepBlue:  "linear-gradient(135deg, #4359FC 0%, #0014A9 100%)",
+  blue:      "linear-gradient(135deg, #5B6EFD 0%, #0014A9 100%)",
 };
 
-export const shadows = {
-  card: '0 8px 24px rgba(67, 89, 252, 0.12)',
-  cardHover: '0 8px 24px rgba(67, 89, 252, 0.18)',
-  float: '0 8px 24px rgba(67, 89, 252, 0.35)',
-  floatHover: '0 12px 32px rgba(67, 89, 252, 0.45)',
+// Greyscale (0: 밝음 → 9: 어두움 / 10: 배경용 밝은 계열)
+theme.GRAYSCALE = {
+  0:  "#F2F2F2",
+  1:  "#E6E6E6",
+  2:  "#D9D9D9",
+  3:  "#CCCCCC",
+  4:  "#C0C0C0",
+  5:  "#B3B3B3",
+  6:  "#A6A6A6",
+  7:  "#999999",
+  8:  "#E5E7EB",
+  9:  "#9CA3AF",
+  10: "#F9FAFB",
 };
 
-export const layout = {
-  headerHeight: '79px',
-  breadcrumbHeight: '40px',
-  sidebarWidth: '312px',  // 3컬럼 영역
-  cardMaxWidth: '984px',  // 9컬럼 영역
-  contentWidth: '1320px', // 12컬럼 가이드 전체 가로
-  gridGap: '24px',        // 컬럼 간 균등 간격
+// Text Colors
+theme.TEXT_COLOR = {
+  basic:     "#333333",
+  primary:   "#4359FC",
+  secondary: "#129D1B",
+  warning:   "#FF8004",
 };
+
+// ─────────────────────────────────────────
+// TYPOGRAPHY
+// ─────────────────────────────────────────
+
+// h1~h13: 사이즈 기준 / FONT_WEIGHT와 조합하여 사용
+// 예) fontSize: theme.FONT_SIZE.h9, fontWeight: theme.FONT_WEIGHT.bold
+theme.FONT_SIZE = {
+  h1:  "72px",   // Heading1
+  h2:  "48px",   // Heading2
+  h3:  "40px",   // Heading3
+  h4:  "36px",   // Heading4
+  h5:  "28px",   // Heading5
+  h6:  "28px",   // Heading6
+  h7:  "24px",   // Heading7  (bold / medium / regular)
+  h8:  "20px",   // Heading8  (bold / medium)
+  h9:  "16px",   // Heading9  (bold / medium / regular / light)
+  h10: "14px",   // Heading10 (bold / medium / regular)
+  h11: "12px",   // Heading11 (bold / medium / regular)
+  h12: "10px",   // Heading12 (bold / regular)
+  h13: "8px",    // Heading13 (bold)
+};
+
+theme.FONT_WEIGHT = {
+  light:   "300",
+  regular: "400",
+  medium:  "500",
+  bold:    "700",
+};
+
+// 행간
+theme.FONT_LINE = {
+  h1:  "80px",
+  h2:  "56px",
+  h3:  "51px",
+  h4:  "51px",
+  h5:  "40px",
+  h6:  "40px",
+  h7:  "32px",
+  h8:  "28px",
+  h9:  "24px",
+  h10: "22px",
+  h11: "20px",
+  h12: "14px",
+  h13: "11px",
+};
+
+export default theme;

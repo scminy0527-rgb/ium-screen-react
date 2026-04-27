@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { colors, fonts, radius } from '../../styles/theme';
+import React from "react";
+import styled from "styled-components";
+import { colors, fonts, radius } from "../../styles/themeOriginal";
 
 const Wrapper = styled.div`
   display: flex;
@@ -63,7 +63,7 @@ const DateText = styled.p`
   white-space: nowrap;
 `;
 
-const NoticeItem = ({ title = '공지 제목', date = '3/8' }) => {
+const NoticeItem = ({ title = "공지 제목", date = "3/8" }) => {
   return (
     <Wrapper>
       <LeftArea>

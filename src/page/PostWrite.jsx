@@ -1,31 +1,53 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { colors, fonts, radius, layout, shadows } from '../styles/theme';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import theme from "../styles/theme";
 
 /* ── 에셋 URL ── */
-const logoSignImg = 'https://www.figma.com/api/mcp/asset/157266aa-f512-4fae-90d0-469e5ccd849d';
-const youtubeLogoImg = 'https://www.figma.com/api/mcp/asset/4a0a2f06-4130-4d40-ac3f-9daee51ce634';
-const naverLogoImg = 'https://www.figma.com/api/mcp/asset/81257a45-6f8a-40e5-83ed-2f65444f1c4c';
-const instagramLogoImg = 'https://www.figma.com/api/mcp/asset/a2762428-0e3e-447d-a6e7-6afa60cf4e22';
+const logoSignImg =
+  "https://www.figma.com/api/mcp/asset/157266aa-f512-4fae-90d0-469e5ccd849d";
+const youtubeLogoImg =
+  "https://www.figma.com/api/mcp/asset/4a0a2f06-4130-4d40-ac3f-9daee51ce634";
+const naverLogoImg =
+  "https://www.figma.com/api/mcp/asset/81257a45-6f8a-40e5-83ed-2f65444f1c4c";
+const instagramLogoImg =
+  "https://www.figma.com/api/mcp/asset/a2762428-0e3e-447d-a6e7-6afa60cf4e22";
 
-const iconBold = 'https://www.figma.com/api/mcp/asset/b673a673-27cf-4dfe-a1f3-9547544fb882';
-const iconItalic = 'https://www.figma.com/api/mcp/asset/37d859a9-fdc3-4dd0-993f-0b2a01c18965';
-const iconUnderline = 'https://www.figma.com/api/mcp/asset/0e4c0f60-257a-4f90-9c5c-b496b37e862c';
-const iconStrikethrough = 'https://www.figma.com/api/mcp/asset/25dba53c-3520-462a-b912-a03c100db925';
-const iconAlignLeft = 'https://www.figma.com/api/mcp/asset/6fa6c454-ca3c-4224-bb60-9ce2bb723a19';
-const iconAlignCenter = 'https://www.figma.com/api/mcp/asset/534159b6-e6dc-4df4-9a76-c2c1d81ae21d';
-const iconAlignRight = 'https://www.figma.com/api/mcp/asset/a335476f-0c24-492c-b324-77cdae8023e3';
-const iconAlignJustify = 'https://www.figma.com/api/mcp/asset/1fc7a056-5959-442b-9994-7355a46bd30b';
-const iconImage = 'https://www.figma.com/api/mcp/asset/f150920e-4461-445e-9832-5b2e2b511a06';
-const iconUpload = 'https://www.figma.com/api/mcp/asset/66deb0b8-9f0e-48ef-945b-0aec781f7f86';
-const iconSaveNotice = 'https://www.figma.com/api/mcp/asset/8cb6e2d2-bd5f-4c73-a458-90a2d56008bc';
+const iconBold =
+  "https://www.figma.com/api/mcp/asset/b673a673-27cf-4dfe-a1f3-9547544fb882";
+const iconItalic =
+  "https://www.figma.com/api/mcp/asset/37d859a9-fdc3-4dd0-993f-0b2a01c18965";
+const iconUnderline =
+  "https://www.figma.com/api/mcp/asset/0e4c0f60-257a-4f90-9c5c-b496b37e862c";
+const iconStrikethrough =
+  "https://www.figma.com/api/mcp/asset/25dba53c-3520-462a-b912-a03c100db925";
+const iconAlignLeft =
+  "https://www.figma.com/api/mcp/asset/6fa6c454-ca3c-4224-bb60-9ce2bb723a19";
+const iconAlignCenter =
+  "https://www.figma.com/api/mcp/asset/534159b6-e6dc-4df4-9a76-c2c1d81ae21d";
+const iconAlignRight =
+  "https://www.figma.com/api/mcp/asset/a335476f-0c24-492c-b324-77cdae8023e3";
+const iconAlignJustify =
+  "https://www.figma.com/api/mcp/asset/1fc7a056-5959-442b-9994-7355a46bd30b";
+const iconImage =
+  "https://www.figma.com/api/mcp/asset/f150920e-4461-445e-9832-5b2e2b511a06";
+const iconUpload =
+  "https://www.figma.com/api/mcp/asset/66deb0b8-9f0e-48ef-945b-0aec781f7f86";
+const iconSaveNotice =
+  "https://www.figma.com/api/mcp/asset/8cb6e2d2-bd5f-4c73-a458-90a2d56008bc";
 
-const CATEGORIES = ['전체', '자유게시판', '학습 질문', '학습 인증', '수어 영상', '취업·진로'];
+const CATEGORIES = [
+  "전체",
+  "자유게시판",
+  "학습 질문",
+  "학습 인증",
+  "수어 영상",
+  "취업·진로",
+];
 
 /* ══ Page ══ */
 const Page = styled.div`
-  background: ${colors.bgSection};
+  background: ${theme.GRAYSCALE[10]};
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -33,13 +55,13 @@ const Page = styled.div`
 
 /* ══ Header ══ */
 const Header = styled.header`
-  background: ${colors.bgCard};
-  height: ${layout.headerHeight};
+  background: ${theme.PALETTE.white};
+  height: 79px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 300px;
-  border-bottom: 1px solid ${colors.border};
+  border-bottom: 1px solid ${theme.GRAYSCALE[8]};
   position: sticky;
   top: 0;
   z-index: 50;
@@ -59,10 +81,9 @@ const LogoSign = styled.img`
 `;
 
 const LogoText = styled.span`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.xl};
-  color: ${colors.primary};
+  font-weight: ${theme.FONT_WEIGHT.bold};
+  font-size: ${theme.FONT_SIZE.h8};
+  color: ${theme.PALETTE.primary.main};
 `;
 
 const Nav = styled.nav`
@@ -72,16 +93,15 @@ const Nav = styled.nav`
 `;
 
 const NavItem = styled.a`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.md};
-  color: ${colors.primaryDark};
+  font-weight: ${theme.FONT_WEIGHT.bold};
+  font-size: ${theme.FONT_SIZE.h10};
+  color: ${theme.PALETTE.primary.dark};
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
 
   &:hover {
-    color: ${colors.primary};
+    color: ${theme.PALETTE.primary.main};
   }
 `;
 
@@ -92,17 +112,18 @@ const HeaderButtons = styled.div`
 `;
 
 const HeaderBtn = styled.button`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.md};
+  font-weight: ${theme.FONT_WEIGHT.bold};
+  font-size: ${theme.FONT_SIZE.h10};
   letter-spacing: -0.28px;
   padding: 8px 16px;
-  border-radius: ${radius.sm};
+  border-radius: 10px;
   cursor: pointer;
   white-space: nowrap;
-  background: ${({ $variant }) => ($variant === 'filled' ? colors.primary : colors.bgCard)};
-  color: ${({ $variant }) => ($variant === 'filled' ? colors.textWhite : colors.primary)};
-  border: 2px solid ${colors.primary};
+  background: ${({ $variant }) =>
+    $variant === "filled" ? theme.PALETTE.primary.main : theme.PALETTE.white};
+  color: ${({ $variant }) =>
+    $variant === "filled" ? theme.PALETTE.white : theme.PALETTE.primary.main};
+  border: 2px solid ${theme.PALETTE.primary.main};
   transition: opacity 0.2s;
 
   &:hover {
@@ -116,13 +137,13 @@ const ContentArea = styled.main`
   padding: 24px 300px 60px;
   display: flex;
   align-items: flex-start;
-  gap: ${layout.gridGap};
+  gap: 24px;
   box-sizing: border-box;
 `;
 
 /* ══ Left Block ══ */
 const LeftBlock = styled.div`
-  width: ${layout.cardMaxWidth};
+  width: 984px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -137,27 +158,28 @@ const ActionButtons = styled.div`
 `;
 
 const ActionBtn = styled.button`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.sm};
+  font-weight: ${theme.FONT_WEIGHT.bold};
+  font-size: ${theme.FONT_SIZE.h11};
   letter-spacing: -0.24px;
   line-height: 20px;
   padding: 8px 30px;
-  border-radius: ${radius.sm};
+  border-radius: 10px;
   cursor: pointer;
   white-space: nowrap;
   transition: opacity 0.2s;
 
   background: ${({ $type }) => {
-    if ($type === 'submit') return colors.primary;
-    return colors.bgCard;
+    if ($type === "submit") return theme.PALETTE.primary.main;
+    return theme.PALETTE.white;
   }};
   color: ${({ $type }) => {
-    if ($type === 'submit') return colors.textWhite;
-    if ($type === 'draft') return colors.primary;
-    return colors.textSub;
+    if ($type === "submit") return theme.PALETTE.white;
+    if ($type === "draft") return theme.PALETTE.primary.main;
+    return theme.GRAYSCALE[9];
   }};
-  border: 1px solid ${({ $type }) => ($type === 'draft' ? colors.primary : colors.border)};
+  border: 1px solid
+    ${({ $type }) =>
+      $type === "draft" ? theme.PALETTE.primary.main : theme.GRAYSCALE[8]};
 
   &:hover {
     opacity: 0.85;
@@ -172,26 +194,25 @@ const WriteCard = styled.div`
 `;
 
 const CardHeader = styled.div`
-  background: ${colors.primary};
+  background: ${theme.PALETTE.primary.main};
   padding: 16px 36px;
-  border-radius: ${radius.card} ${radius.card} 0 0;
+  border-radius: 20px 20px 0 0;
 
   p {
     margin: 0;
-    font-family: ${fonts.family};
-    font-weight: ${fonts.weight.regular};
-    font-size: ${fonts.size.md};
+    font-weight: ${theme.FONT_WEIGHT.regular};
+    font-size: ${theme.FONT_SIZE.h10};
     line-height: 22px;
     letter-spacing: -0.28px;
-    color: ${colors.textWhite};
+    color: ${theme.PALETTE.white};
     white-space: nowrap;
   }
 `;
 
 const CardBody = styled.div`
-  background: ${colors.bgCard};
+  background: ${theme.PALETTE.white};
   padding: 32px;
-  border-radius: 0 0 ${radius.card} ${radius.card};
+  border-radius: 0 0 20px 20px;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -201,7 +222,7 @@ const CardBody = styled.div`
 const FieldRow = styled.div`
   display: flex;
   align-items: flex-start;
-  gap: ${({ $gap }) => $gap || '36px'};
+  gap: ${({ $gap }) => $gap || "36px"};
   width: 100%;
 `;
 
@@ -216,21 +237,19 @@ const FieldLabel = styled.div`
 `;
 
 const LabelText = styled.span`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.md};
+  font-weight: ${theme.FONT_WEIGHT.bold};
+  font-size: ${theme.FONT_SIZE.h10};
   line-height: normal;
   letter-spacing: -0.28px;
-  color: ${colors.textMain};
+  color: ${theme.TEXT_COLOR.basic};
 `;
 
 const RequiredMark = styled.span`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.sm};
+  font-weight: ${theme.FONT_WEIGHT.bold};
+  font-size: ${theme.FONT_SIZE.h11};
   line-height: 20px;
   letter-spacing: -0.24px;
-  color: ${colors.primary};
+  color: ${theme.PALETTE.primary.main};
 `;
 
 /* ── 텍스트 입력 필드 ── */
@@ -239,24 +258,23 @@ const InputField = styled.input`
   min-width: 0;
   height: 49px;
   padding: 0 24px;
-  background: ${colors.bgCard};
-  border: 1px solid ${colors.border};
-  border-radius: ${radius.input};
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.md};
+  background: ${theme.PALETTE.white};
+  border: 1px solid ${theme.GRAYSCALE[8]};
+  border-radius: 8px;
+  font-weight: ${theme.FONT_WEIGHT.regular};
+  font-size: ${theme.FONT_SIZE.h10};
   line-height: 22px;
   letter-spacing: -0.28px;
-  color: ${colors.textMain};
+  color: ${theme.TEXT_COLOR.basic};
   box-sizing: border-box;
   outline: none;
 
   &::placeholder {
-    color: ${colors.textSub};
+    color: ${theme.GRAYSCALE[9]};
   }
 
   &:focus {
-    border-color: ${colors.primary};
+    border-color: ${theme.PALETTE.primary.main};
   }
 `;
 
@@ -271,12 +289,11 @@ const CategoryCol = styled.div`
 
 const CategoryHint = styled.p`
   margin: 0;
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.sm};
+  font-weight: ${theme.FONT_WEIGHT.regular};
+  font-size: ${theme.FONT_SIZE.h11};
   line-height: 20px;
   letter-spacing: -0.24px;
-  color: ${colors.textSub};
+  color: ${theme.GRAYSCALE[9]};
 `;
 
 const CategoryPills = styled.div`
@@ -289,24 +306,32 @@ const CategoryPills = styled.div`
 const CategoryPill = styled.button`
   height: 36px;
   padding: 0 24px;
-  border-radius: ${radius.pill};
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.base};
+  border-radius: 100px;
+  font-weight: ${theme.FONT_WEIGHT.bold};
+  font-size: ${theme.FONT_SIZE.h9};
   line-height: 24px;
   letter-spacing: -0.32px;
   white-space: nowrap;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s;
 
-  background: ${({ $active }) => ($active ? colors.primary : colors.bgCard)};
-  color: ${({ $active }) => ($active ? colors.textWhite : colors.textMain)};
-  border: 1px solid ${({ $active }) => ($active ? colors.primary : colors.border)};
+  background: ${({ $active }) =>
+    $active ? theme.PALETTE.primary.main : theme.PALETTE.white};
+  color: ${({ $active }) =>
+    $active ? theme.PALETTE.white : theme.TEXT_COLOR.basic};
+  border: 1px solid
+    ${({ $active }) =>
+      $active ? theme.PALETTE.primary.main : theme.GRAYSCALE[8]};
 
   &:hover {
-    background: ${({ $active }) => ($active ? colors.primary : colors.primaryLight)};
-    border-color: ${colors.primary};
-    color: ${({ $active }) => ($active ? colors.textWhite : colors.primary)};
+    background: ${({ $active }) =>
+      $active ? theme.PALETTE.primary.main : theme.PALETTE.primary.extraLight};
+    border-color: ${theme.PALETTE.primary.main};
+    color: ${({ $active }) =>
+      $active ? theme.PALETTE.white : theme.PALETTE.primary.main};
   }
 `;
 
@@ -326,8 +351,8 @@ const ToolbarRow = styled.div`
 `;
 
 const Toolbar = styled.div`
-  background: ${colors.bgSection};
-  border: 1px solid ${colors.border};
+  background: ${theme.GRAYSCALE[10]};
+  border: 1px solid ${theme.GRAYSCALE[8]};
   border-radius: 12px;
   padding: 4px 8px;
   display: flex;
@@ -361,21 +386,20 @@ const ToolbarIcon = styled.button`
 const ToolbarDivider = styled.div`
   width: 1px;
   height: 20px;
-  background: ${colors.border};
+  background: ${theme.GRAYSCALE[8]};
   flex-shrink: 0;
 `;
 
 const VoiceBtn = styled.button`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.sm};
+  font-weight: ${theme.FONT_WEIGHT.bold};
+  font-size: ${theme.FONT_SIZE.h11};
   line-height: 20px;
   letter-spacing: -0.24px;
   padding: 5px 30px;
-  border-radius: ${radius.sm};
+  border-radius: 10px;
   border: none;
-  background: ${colors.live};
-  color: ${colors.textWhite};
+  background: ${theme.PALETTE.secondary.main};
+  color: ${theme.PALETTE.white};
   cursor: pointer;
   white-space: nowrap;
   transition: opacity 0.2s;
@@ -389,26 +413,25 @@ const TextArea = styled.textarea`
   width: 100%;
   height: 360px;
   padding: 16px 24px;
-  background: ${colors.bgCard};
-  border: 1px solid ${colors.border};
-  border-radius: ${radius.input};
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.md};
+  background: ${theme.PALETTE.white};
+  border: 1px solid ${theme.GRAYSCALE[8]};
+  border-radius: 8px;
+  font-weight: ${theme.FONT_WEIGHT.regular};
+  font-size: ${theme.FONT_SIZE.h10};
   line-height: 22px;
   letter-spacing: -0.28px;
-  color: ${colors.textMain};
+  color: ${theme.TEXT_COLOR.basic};
   resize: vertical;
   box-sizing: border-box;
   outline: none;
 
   &::placeholder {
-    color: ${colors.textSub};
+    color: ${theme.GRAYSCALE[9]};
     white-space: nowrap;
   }
 
   &:focus {
-    border-color: ${colors.primary};
+    border-color: ${theme.PALETTE.primary.main};
   }
 `;
 
@@ -417,9 +440,9 @@ const FileDropZone = styled.div`
   flex: 1;
   min-width: 0;
   height: 180px;
-  background: ${colors.bgSection};
-  border: 2px dashed ${colors.border};
-  border-radius: ${radius.input};
+  background: ${theme.GRAYSCALE[10]};
+  border: 2px dashed ${theme.GRAYSCALE[8]};
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -431,7 +454,7 @@ const FileDropZone = styled.div`
   transition: border-color 0.2s;
 
   &:hover {
-    border-color: ${colors.primary};
+    border-color: ${theme.PALETTE.primary.main};
   }
 `;
 
@@ -443,22 +466,20 @@ const UploadIcon = styled.img`
 
 const FileDropTitle = styled.p`
   margin: 0;
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.md};
+  font-weight: ${theme.FONT_WEIGHT.bold};
+  font-size: ${theme.FONT_SIZE.h10};
   letter-spacing: -0.28px;
-  color: ${colors.textSub};
+  color: ${theme.GRAYSCALE[9]};
   text-align: center;
 `;
 
 const FileDropSub = styled.p`
   margin: 0;
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.sm};
+  font-weight: ${theme.FONT_WEIGHT.regular};
+  font-size: ${theme.FONT_SIZE.h11};
   line-height: 20px;
   letter-spacing: -0.24px;
-  color: ${colors.textSub};
+  color: ${theme.GRAYSCALE[9]};
   text-align: center;
 `;
 
@@ -471,23 +492,24 @@ const FileButtons = styled.div`
 `;
 
 const FileBtn = styled.button`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.sm};
+  font-weight: ${theme.FONT_WEIGHT.bold};
+  font-size: ${theme.FONT_SIZE.h11};
   line-height: 20px;
   letter-spacing: -0.24px;
   padding: 8px 30px;
-  border-radius: ${radius.sm};
-  border: 1px solid ${colors.border};
-  background: ${colors.bgCard};
-  color: ${colors.textSub};
+  border-radius: 10px;
+  border: 1px solid ${theme.GRAYSCALE[8]};
+  background: ${theme.PALETTE.white};
+  color: ${theme.GRAYSCALE[9]};
   cursor: pointer;
   white-space: nowrap;
-  transition: border-color 0.2s, color 0.2s;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
 
   &:hover {
-    border-color: ${colors.primary};
-    color: ${colors.primary};
+    border-color: ${theme.PALETTE.primary.main};
+    color: ${theme.PALETTE.primary.main};
   }
 `;
 
@@ -502,42 +524,40 @@ const TagCol = styled.div`
 
 const TagHint = styled.p`
   margin: 0;
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.sm};
+  font-weight: ${theme.FONT_WEIGHT.regular};
+  font-size: ${theme.FONT_SIZE.h11};
   line-height: 20px;
   letter-spacing: -0.24px;
-  color: ${colors.textSub};
+  color: ${theme.GRAYSCALE[9]};
 `;
 
 const TagInputField = styled.input`
   width: 100%;
   height: 49px;
   padding: 0 24px;
-  background: ${colors.bgCard};
-  border: 1px solid ${colors.border};
-  border-radius: ${radius.input};
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.md};
+  background: ${theme.PALETTE.white};
+  border: 1px solid ${theme.GRAYSCALE[8]};
+  border-radius: 8px;
+  font-weight: ${theme.FONT_WEIGHT.regular};
+  font-size: ${theme.FONT_SIZE.h10};
   line-height: 22px;
   letter-spacing: -0.28px;
-  color: ${colors.textMain};
+  color: ${theme.TEXT_COLOR.basic};
   box-sizing: border-box;
   outline: none;
 
   &::placeholder {
-    color: ${colors.textSub};
+    color: ${theme.GRAYSCALE[9]};
   }
 
   &:focus {
-    border-color: ${colors.primary};
+    border-color: ${theme.PALETTE.primary.main};
   }
 `;
 
 /* ══ Right Block ══ */
 const RightBlock = styled.div`
-  width: ${layout.sidebarWidth};
+  width: 312px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -546,29 +566,28 @@ const RightBlock = styled.div`
 
 /* ── 사이드 카드 공통 ── */
 const SideCard = styled.div`
-  background: ${colors.bgCard};
-  border-radius: ${radius.card};
+  background: ${theme.PALETTE.white};
+  border-radius: 20px;
   padding: 32px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  box-shadow: ${shadows.card};
+  box-shadow: 0 8px 24px rgba(67, 89, 252, 0.12);
 `;
 
 const SideCardTitle = styled.p`
   margin: 0;
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.md};
+  font-weight: ${theme.FONT_WEIGHT.bold};
+  font-size: ${theme.FONT_SIZE.h10};
   line-height: normal;
   letter-spacing: -0.28px;
-  color: ${colors.textMain};
+  color: ${theme.TEXT_COLOR.basic};
 `;
 
 const SideDivider = styled.hr`
   margin: 0;
   border: none;
-  border-top: 1px solid ${colors.border};
+  border-top: 1px solid ${theme.GRAYSCALE[8]};
   width: 100%;
 `;
 
@@ -588,7 +607,7 @@ const NoticeItem = styled.div`
 const NumberBadge = styled.div`
   width: 20px;
   height: 20px;
-  background: ${colors.primary};
+  background: ${theme.PALETTE.primary.main};
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -596,43 +615,41 @@ const NumberBadge = styled.div`
   flex-shrink: 0;
 
   span {
-    font-family: ${fonts.family};
-    font-weight: ${fonts.weight.bold};
-    font-size: ${fonts.size.sm};
+    font-weight: ${theme.FONT_WEIGHT.bold};
+    font-size: ${theme.FONT_SIZE.h11};
     line-height: normal;
-    color: ${colors.textWhite};
+    color: ${theme.PALETTE.white};
     text-align: center;
   }
 `;
 
 const NoticeText = styled.p`
   margin: 0;
-  font-family: ${fonts.family};
-  font-size: ${fonts.size.sm};
+  font-size: ${theme.FONT_SIZE.h11};
   line-height: 20px;
   letter-spacing: -0.24px;
-  color: ${colors.textSub};
+  color: ${theme.GRAYSCALE[9]};
 `;
 
 const NoticeStrong = styled.strong`
-  font-weight: ${fonts.weight.bold};
-  color: ${colors.textMain};
+  font-weight: ${theme.FONT_WEIGHT.bold};
+  color: ${theme.TEXT_COLOR.basic};
 `;
 
 const NoticeDanger = styled.strong`
-  font-weight: ${fonts.weight.bold};
-  color: ${colors.danger};
+  font-weight: ${theme.FONT_WEIGHT.bold};
+  color: ${theme.PALETTE.red};
 `;
 
 const NoticeGreen = styled.strong`
-  font-weight: ${fonts.weight.bold};
-  color: ${colors.live};
+  font-weight: ${theme.FONT_WEIGHT.bold};
+  color: ${theme.PALETTE.secondary.main};
 `;
 
 /* ── 자동 임시저장 알림 ── */
 const SaveNotice = styled.div`
-  background: ${colors.primaryLight};
-  border-radius: ${radius.card};
+  background: ${theme.PALETTE.primary.extraLight};
+  border-radius: 20px;
   padding: 16px 32px;
   display: flex;
   align-items: center;
@@ -648,18 +665,17 @@ const SaveIcon = styled.img`
 
 const SaveText = styled.p`
   margin: 0;
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.sm};
+  font-weight: ${theme.FONT_WEIGHT.regular};
+  font-size: ${theme.FONT_SIZE.h11};
   line-height: 20px;
   letter-spacing: -0.24px;
-  color: ${colors.primary};
+  color: ${theme.PALETTE.primary.main};
   white-space: pre-line;
 `;
 
 /* ══ Footer ══ */
 const Footer = styled.footer`
-  background: ${colors.primaryFooter};
+  background: ${theme.PALETTE.primary.main};
   padding: 40px 300px;
   box-sizing: border-box;
 `;
@@ -678,10 +694,9 @@ const FooterLinks = styled.div`
 `;
 
 const FooterLink = styled.a`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.medium};
-  font-size: ${fonts.size.base};
-  color: ${colors.textWhite};
+  font-weight: ${theme.FONT_WEIGHT.medium};
+  font-size: ${theme.FONT_SIZE.h9};
+  color: ${theme.PALETTE.white};
   text-decoration: none;
   cursor: pointer;
 
@@ -693,7 +708,7 @@ const FooterLink = styled.a`
 const FooterLinkDivider = styled.div`
   width: 1px;
   height: 11px;
-  background: ${colors.footerDivider};
+  background: rgba(255, 255, 255, 0.3);
 `;
 
 const SocialLinks = styled.div`
@@ -706,7 +721,7 @@ const SocialBtn = styled.a`
   width: 44px;
   height: 44px;
   border-radius: 22px;
-  border: 1px solid ${colors.footerSocialBorder};
+  border: 1px solid rgba(255, 255, 255, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -720,15 +735,14 @@ const SocialBtn = styled.a`
   }
 
   &:hover {
-    border-color: ${colors.textWhite};
+    border-color: ${theme.PALETTE.white};
   }
 `;
 
 const FooterInfoLabel = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.mdLg};
-  color: ${colors.textWhite};
+  font-weight: ${theme.FONT_WEIGHT.bold};
+  font-size: ${theme.FONT_SIZE.h9};
+  color: ${theme.PALETTE.white};
   letter-spacing: -0.48px;
   margin: 0 0 12px 0;
 `;
@@ -741,10 +755,9 @@ const FooterInfoRow = styled.div`
 `;
 
 const FooterInfo = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.smMd};
-  color: ${colors.textWhite};
+  font-weight: ${theme.FONT_WEIGHT.regular};
+  font-size: ${theme.FONT_SIZE.h11};
+  color: ${theme.PALETTE.white};
   margin: 0;
   white-space: nowrap;
 `;
@@ -752,13 +765,13 @@ const FooterInfo = styled.p`
 /* ══ 컴포넌트 ══ */
 const PostWrite = () => {
   const navigate = useNavigate();
-  const [activeCategory, setActiveCategory] = useState('전체');
+  const [activeCategory, setActiveCategory] = useState("전체");
 
   return (
     <Page>
       {/* 헤더 */}
       <Header>
-        <LogoArea onClick={() => navigate('/')}>
+        <LogoArea onClick={() => navigate("/")}>
           <LogoSign src={logoSignImg} alt="이음 로고" />
           <LogoText>이음</LogoText>
         </LogoArea>
@@ -782,7 +795,9 @@ const PostWrite = () => {
         <LeftBlock>
           {/* 상단 액션 버튼 */}
           <ActionButtons>
-            <ActionBtn $type="cancel" onClick={() => navigate(-1)}>취소</ActionBtn>
+            <ActionBtn $type="cancel" onClick={() => navigate(-1)}>
+              취소
+            </ActionBtn>
             <ActionBtn $type="draft">임시저장</ActionBtn>
             <ActionBtn $type="submit">등록하기</ActionBtn>
           </ActionButtons>
@@ -801,7 +816,9 @@ const PostWrite = () => {
                   <RequiredMark>*</RequiredMark>
                 </FieldLabel>
                 <CategoryCol>
-                  <CategoryHint>글의 성격에 맞는 카테고리를 선택해 주세요</CategoryHint>
+                  <CategoryHint>
+                    글의 성격에 맞는 카테고리를 선택해 주세요
+                  </CategoryHint>
                   <CategoryPills>
                     {CATEGORIES.map((cat) => (
                       <CategoryPill
@@ -834,18 +851,36 @@ const PostWrite = () => {
                 <BodyCol>
                   <ToolbarRow>
                     <Toolbar>
-                      <ToolbarIcon><img src={iconBold} alt="굵게" /></ToolbarIcon>
-                      <ToolbarIcon><img src={iconItalic} alt="기울임" /></ToolbarIcon>
-                      <ToolbarIcon><img src={iconUnderline} alt="밑줄" /></ToolbarIcon>
-                      <ToolbarIcon><img src={iconStrikethrough} alt="취소선" /></ToolbarIcon>
+                      <ToolbarIcon>
+                        <img src={iconBold} alt="굵게" />
+                      </ToolbarIcon>
+                      <ToolbarIcon>
+                        <img src={iconItalic} alt="기울임" />
+                      </ToolbarIcon>
+                      <ToolbarIcon>
+                        <img src={iconUnderline} alt="밑줄" />
+                      </ToolbarIcon>
+                      <ToolbarIcon>
+                        <img src={iconStrikethrough} alt="취소선" />
+                      </ToolbarIcon>
                       <ToolbarDivider />
-                      <ToolbarIcon style={{ transform: 'scaleY(-1) rotate(180deg)' }}>
+                      <ToolbarIcon
+                        style={{ transform: "scaleY(-1) rotate(180deg)" }}
+                      >
                         <img src={iconAlignLeft} alt="왼쪽 정렬" />
                       </ToolbarIcon>
-                      <ToolbarIcon><img src={iconAlignCenter} alt="가운데 정렬" /></ToolbarIcon>
-                      <ToolbarIcon><img src={iconAlignRight} alt="오른쪽 정렬" /></ToolbarIcon>
-                      <ToolbarIcon><img src={iconAlignJustify} alt="양쪽 정렬" /></ToolbarIcon>
-                      <ToolbarIcon><img src={iconImage} alt="이미지 삽입" /></ToolbarIcon>
+                      <ToolbarIcon>
+                        <img src={iconAlignCenter} alt="가운데 정렬" />
+                      </ToolbarIcon>
+                      <ToolbarIcon>
+                        <img src={iconAlignRight} alt="오른쪽 정렬" />
+                      </ToolbarIcon>
+                      <ToolbarIcon>
+                        <img src={iconAlignJustify} alt="양쪽 정렬" />
+                      </ToolbarIcon>
+                      <ToolbarIcon>
+                        <img src={iconImage} alt="이미지 삽입" />
+                      </ToolbarIcon>
                     </Toolbar>
                     <VoiceBtn>음성 입력</VoiceBtn>
                   </ToolbarRow>
@@ -860,8 +895,12 @@ const PostWrite = () => {
                 </FieldLabel>
                 <FileDropZone>
                   <UploadIcon src={iconUpload} alt="파일 업로드" />
-                  <FileDropTitle>파일을 드래그하거나 클릭해서 첨부하세요</FileDropTitle>
-                  <FileDropSub>JPG, PNG, GIF, MP4 지원 · 파일당 최대 10MB</FileDropSub>
+                  <FileDropTitle>
+                    파일을 드래그하거나 클릭해서 첨부하세요
+                  </FileDropTitle>
+                  <FileDropSub>
+                    JPG, PNG, GIF, MP4 지원 · 파일당 최대 10MB
+                  </FileDropSub>
                   <FileButtons>
                     <FileBtn>이미지 첨부</FileBtn>
                     <FileBtn>영상 첨부</FileBtn>
@@ -885,7 +924,9 @@ const PostWrite = () => {
 
           {/* 하단 액션 버튼 */}
           <ActionButtons>
-            <ActionBtn $type="cancel" onClick={() => navigate(-1)}>취소</ActionBtn>
+            <ActionBtn $type="cancel" onClick={() => navigate(-1)}>
+              취소
+            </ActionBtn>
             <ActionBtn $type="draft">임시저장</ActionBtn>
             <ActionBtn $type="submit">등록하기</ActionBtn>
           </ActionButtons>
@@ -899,28 +940,40 @@ const PostWrite = () => {
             <SideDivider />
             <NoticeList>
               <NoticeItem>
-                <NumberBadge><span>1</span></NumberBadge>
+                <NumberBadge>
+                  <span>1</span>
+                </NumberBadge>
                 <NoticeText>
-                  <NoticeStrong>카테고리</NoticeStrong>를 먼저 선택해 주세요.{'\n'}
-                  글의 성격에 맞는 게시판에 올려야{'\n'}더 많은 분들이 볼 수 있어요.
+                  <NoticeStrong>카테고리</NoticeStrong>를 먼저 선택해 주세요.
+                  {"\n"}
+                  글의 성격에 맞는 게시판에 올려야{"\n"}더 많은 분들이 볼 수
+                  있어요.
                 </NoticeText>
               </NoticeItem>
               <NoticeItem>
-                <NumberBadge><span>2</span></NumberBadge>
+                <NumberBadge>
+                  <span>2</span>
+                </NumberBadge>
                 <NoticeText>
-                  <NoticeStrong>제목</NoticeStrong>은 내용을 잘 나타낼 수 있도록{'\n'}명확하게 작성해 주세요.
+                  <NoticeStrong>제목</NoticeStrong>은 내용을 잘 나타낼 수 있도록
+                  {"\n"}명확하게 작성해 주세요.
                 </NoticeText>
               </NoticeItem>
               <NoticeItem>
-                <NumberBadge><span>3</span></NumberBadge>
+                <NumberBadge>
+                  <span>3</span>
+                </NumberBadge>
                 <NoticeText>
-                  <NoticeStrong>태그</NoticeStrong>를 추가하면 비슷한 관심사의{'\n'}분들이 글을 더 쉽게 찾아요
+                  <NoticeStrong>태그</NoticeStrong>를 추가하면 비슷한 관심사의
+                  {"\n"}분들이 글을 더 쉽게 찾아요
                 </NoticeText>
               </NoticeItem>
               <NoticeItem>
-                <NumberBadge><span>4</span></NumberBadge>
+                <NumberBadge>
+                  <span>4</span>
+                </NumberBadge>
                 <NoticeText>
-                  수어 영상이나 이미지를 첨부하면{'\n'}
+                  수어 영상이나 이미지를 첨부하면{"\n"}
                   <NoticeStrong>훨씬 풍부한 게시글</NoticeStrong>이 됩니다.
                 </NoticeText>
               </NoticeItem>
@@ -931,7 +984,9 @@ const PostWrite = () => {
           <SaveNotice>
             <SaveIcon src={iconSaveNotice} alt="" />
             <SaveText>
-              {'작성 중인 글은 자동으로 임시 저장됩니다.\n언제든지 이어서 작성할 수 있어요.'}
+              {
+                "작성 중인 글은 자동으로 임시 저장됩니다.\n언제든지 이어서 작성할 수 있어요."
+              }
             </SaveText>
           </SaveNotice>
 
@@ -941,27 +996,38 @@ const PostWrite = () => {
             <SideDivider />
             <NoticeList>
               <NoticeItem>
-                <NumberBadge><span>1</span></NumberBadge>
+                <NumberBadge>
+                  <span>1</span>
+                </NumberBadge>
                 <NoticeText>
                   <NoticeGreen>서로 존중</NoticeGreen>하고 배려하는 말 사용
                 </NoticeText>
               </NoticeItem>
               <NoticeItem>
-                <NumberBadge><span>2</span></NumberBadge>
+                <NumberBadge>
+                  <span>2</span>
+                </NumberBadge>
                 <NoticeText>
-                  <NoticeDanger>욕설, 비방</NoticeDanger> 및 혐오 표현 <NoticeDanger>금지</NoticeDanger>
+                  <NoticeDanger>욕설, 비방</NoticeDanger> 및 혐오 표현{" "}
+                  <NoticeDanger>금지</NoticeDanger>
                 </NoticeText>
               </NoticeItem>
               <NoticeItem>
-                <NumberBadge><span>3</span></NumberBadge>
+                <NumberBadge>
+                  <span>3</span>
+                </NumberBadge>
                 <NoticeText>
-                  <NoticeDanger>광고, 홍보성</NoticeDanger> 게시글 <NoticeDanger>삭제</NoticeDanger>
+                  <NoticeDanger>광고, 홍보성</NoticeDanger> 게시글{" "}
+                  <NoticeDanger>삭제</NoticeDanger>
                 </NoticeText>
               </NoticeItem>
               <NoticeItem>
-                <NumberBadge><span>4</span></NumberBadge>
+                <NumberBadge>
+                  <span>4</span>
+                </NumberBadge>
                 <NoticeText>
-                  <NoticeDanger>저작권 침해</NoticeDanger> 콘텐츠 <NoticeDanger>금지</NoticeDanger>
+                  <NoticeDanger>저작권 침해</NoticeDanger> 콘텐츠{" "}
+                  <NoticeDanger>금지</NoticeDanger>
                 </NoticeText>
               </NoticeItem>
             </NoticeList>
@@ -978,9 +1044,15 @@ const PostWrite = () => {
             <FooterLink>서비스 이용약관</FooterLink>
           </FooterLinks>
           <SocialLinks>
-            <SocialBtn><img src={youtubeLogoImg} alt="유튜브" /></SocialBtn>
-            <SocialBtn><img src={naverLogoImg} alt="네이버" /></SocialBtn>
-            <SocialBtn><img src={instagramLogoImg} alt="인스타그램" /></SocialBtn>
+            <SocialBtn>
+              <img src={youtubeLogoImg} alt="유튜브" />
+            </SocialBtn>
+            <SocialBtn>
+              <img src={naverLogoImg} alt="네이버" />
+            </SocialBtn>
+            <SocialBtn>
+              <img src={instagramLogoImg} alt="인스타그램" />
+            </SocialBtn>
           </SocialLinks>
         </FooterTop>
         <FooterInfoLabel>INFO.</FooterInfoLabel>
@@ -989,7 +1061,7 @@ const PostWrite = () => {
           <FooterInfo>대표 : 노규호 외 4명</FooterInfo>
           <FooterInfo>사업자등록번호 : 123-45-67890</FooterInfo>
         </FooterInfoRow>
-        <FooterInfoRow style={{ marginTop: '8px' }}>
+        <FooterInfoRow style={{ marginTop: "8px" }}>
           <FooterInfo>주소 : 서울특별시 마포구 백범로 130</FooterInfo>
           <FooterInfo>광고·제휴문의 : code-kine@gmail.com</FooterInfo>
         </FooterInfoRow>

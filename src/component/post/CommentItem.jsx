@@ -1,10 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faCommentDots } from '@fortawesome/free-solid-svg-icons';
-import { colors, fonts, radius } from '../../styles/theme';
+import React from "react";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faCommentDots } from "@fortawesome/free-solid-svg-icons";
+import { colors, fonts, radius } from "../../styles/themeOriginal";
 
-const reportIconImg = 'https://www.figma.com/api/mcp/asset/3823b07b-8dff-47fb-9bc5-b1dacb0103e8';
+const reportIconImg =
+  "https://www.figma.com/api/mcp/asset/3823b07b-8dff-47fb-9bc5-b1dacb0103e8";
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,7 +13,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   padding: 16px 0;
   background: ${colors.bgCard};
-  padding-left: ${({ isReply }) => (isReply ? '56px' : '0')};
+  padding-left: ${({ isReply }) => (isReply ? "56px" : "0")};
 `;
 
 const LeftArea = styled.div`
@@ -124,9 +125,13 @@ const AccessBtn = styled.button`
   letter-spacing: -0.24px;
   cursor: pointer;
   white-space: nowrap;
-  background: ${({ variant }) => (variant === 'blue' ? colors.primaryLight : colors.accessibilityReadBg)};
-  color: ${({ variant }) => (variant === 'blue' ? colors.primary : colors.accessibilityRead)};
-  border: 1px solid ${({ variant }) => (variant === 'blue' ? colors.primary : colors.accessibilityRead)};
+  background: ${({ variant }) =>
+    variant === "blue" ? colors.primaryLight : colors.accessibilityReadBg};
+  color: ${({ variant }) =>
+    variant === "blue" ? colors.primary : colors.accessibilityRead};
+  border: 1px solid
+    ${({ variant }) =>
+      variant === "blue" ? colors.primary : colors.accessibilityRead};
 `;
 
 const RightArea = styled.div`
@@ -171,14 +176,14 @@ const ReportButton = styled.button`
 
 const CommentItem = ({
   avatar = null,
-  authorName = '사용자',
+  authorName = "사용자",
   isAuthor = false,
   isReply = false,
-  text = '',
+  text = "",
   lines = [],
   likes = 1,
   replies = 1,
-  time = '방금 전',
+  time = "방금 전",
   showAccessibility = true,
 }) => {
   const displayLines = lines.length > 0 ? lines : text ? [text] : [];

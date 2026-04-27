@@ -1,17 +1,17 @@
-import React from 'react';
-import styled from 'styled-components';
-import { colors, fonts, radius } from '../../styles/theme';
+import React from "react";
+import styled from "styled-components";
+import { colors, fonts, radius } from "../../styles/themeOriginal";
 
 const MessageRow = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: ${({ $isMine }) => ($isMine ? 'flex-end' : 'flex-start')};
-  justify-content: ${({ $isMine }) => ($isMine ? 'flex-end' : 'flex-start')};
+  align-items: ${({ $isMine }) => ($isMine ? "flex-end" : "flex-start")};
+  justify-content: ${({ $isMine }) => ($isMine ? "flex-end" : "flex-start")};
   gap: 8px;
   width: 100%;
   max-width: 480px;
-  margin-left: ${({ $isMine }) => ($isMine ? 'auto' : '0')};
-  margin-right: ${({ $isMine }) => ($isMine ? '0' : 'auto')};
+  margin-left: ${({ $isMine }) => ($isMine ? "auto" : "0")};
+  margin-right: ${({ $isMine }) => ($isMine ? "0" : "auto")};
 `;
 
 const ProfileImage = styled.img`
@@ -55,7 +55,8 @@ const BubbleRow = styled.div`
 `;
 
 const Bubble = styled.div`
-  background-color: ${({ $isMine }) => ($isMine ? colors.primary : colors.bgCard)};
+  background-color: ${({ $isMine }) =>
+    $isMine ? colors.primary : colors.bgCard};
   border-radius: ${radius.button};
   padding: 8px 12px;
   max-width: 280px;
@@ -83,9 +84,9 @@ const TimeText = styled.p`
 
 const ChatMessage = ({
   isMine = false,
-  message = '메세지 메세지',
-  time = '14:02',
-  username = 'ㅇㅇ',
+  message = "메세지 메세지",
+  time = "14:02",
+  username = "ㅇㅇ",
   profileImage = null,
 }) => {
   if (isMine) {

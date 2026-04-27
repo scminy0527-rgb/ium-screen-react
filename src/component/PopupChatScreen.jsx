@@ -1,53 +1,158 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { colors, fonts, radius } from '../styles/theme';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { colors, fonts, radius } from "../styles/themeOriginal";
 
 // Figma asset URLs (expires in 7 days)
 const assets = {
-  roomProfile:  'https://www.figma.com/api/mcp/asset/4597fd24-1f77-4b23-a97f-9d0612d37539',
-  liveVector:   'https://www.figma.com/api/mcp/asset/79378b34-81dd-4aef-bc8a-2e9814e941b7',
-  emojiIcon:    'https://www.figma.com/api/mcp/asset/7326d7ec-d93d-4233-a0cb-6b4c1a81433e',
-  imageIcon:    'https://www.figma.com/api/mcp/asset/0e43611f-4878-4e38-a9b5-3429810282f1',
-  linkIcon:     'https://www.figma.com/api/mcp/asset/02cbb637-a056-4524-a973-dd1de4c0bc6d',
-  signIcon:     'https://www.figma.com/api/mcp/asset/e4fac756-efc7-444e-8b51-66b882636ee0',
-  downloadIcon: 'https://www.figma.com/api/mcp/asset/20ea9338-907b-444f-9835-2f74b2aa1a24',
-  minimizeV:    'https://www.figma.com/api/mcp/asset/d026f38b-0832-4a94-b0cc-5bbc2206c401',
-  closeV:       'https://www.figma.com/api/mcp/asset/633d41af-e1e1-462a-acec-b1534e4d49ad',
-  onlineDot:    'https://www.figma.com/api/mcp/asset/b33f6cd4-cc19-4c37-9250-813cb5dca21d',
-  avatarBook:   'https://www.figma.com/api/mcp/asset/08386982-c82d-42f5-af37-598a6fd8785a',
-  avatar2:      'https://www.figma.com/api/mcp/asset/83e9a63d-b47c-449f-b99b-fcf322b5e2bd',
-  avatar3:      'https://www.figma.com/api/mcp/asset/cc784c94-994e-4a8f-91f1-23642503d8d9',
-  avatar4:      'https://www.figma.com/api/mcp/asset/ba8e3192-8c1a-4388-baa8-a512da31e094',
-  avatar5:      'https://www.figma.com/api/mcp/asset/6d0896e4-c001-4785-806b-e2b3e7943f21',
-  msgAvatar1:   'https://www.figma.com/api/mcp/asset/047eac11-c15a-4d40-bf4b-3c6cc159b4de',
-  msgAvatar2:   'https://www.figma.com/api/mcp/asset/f2fad4c6-fd43-4ef4-8d70-4cf117c31970',
+  roomProfile:
+    "https://www.figma.com/api/mcp/asset/4597fd24-1f77-4b23-a97f-9d0612d37539",
+  liveVector:
+    "https://www.figma.com/api/mcp/asset/79378b34-81dd-4aef-bc8a-2e9814e941b7",
+  emojiIcon:
+    "https://www.figma.com/api/mcp/asset/7326d7ec-d93d-4233-a0cb-6b4c1a81433e",
+  imageIcon:
+    "https://www.figma.com/api/mcp/asset/0e43611f-4878-4e38-a9b5-3429810282f1",
+  linkIcon:
+    "https://www.figma.com/api/mcp/asset/02cbb637-a056-4524-a973-dd1de4c0bc6d",
+  signIcon:
+    "https://www.figma.com/api/mcp/asset/e4fac756-efc7-444e-8b51-66b882636ee0",
+  downloadIcon:
+    "https://www.figma.com/api/mcp/asset/20ea9338-907b-444f-9835-2f74b2aa1a24",
+  minimizeV:
+    "https://www.figma.com/api/mcp/asset/d026f38b-0832-4a94-b0cc-5bbc2206c401",
+  closeV:
+    "https://www.figma.com/api/mcp/asset/633d41af-e1e1-462a-acec-b1534e4d49ad",
+  onlineDot:
+    "https://www.figma.com/api/mcp/asset/b33f6cd4-cc19-4c37-9250-813cb5dca21d",
+  avatarBook:
+    "https://www.figma.com/api/mcp/asset/08386982-c82d-42f5-af37-598a6fd8785a",
+  avatar2:
+    "https://www.figma.com/api/mcp/asset/83e9a63d-b47c-449f-b99b-fcf322b5e2bd",
+  avatar3:
+    "https://www.figma.com/api/mcp/asset/cc784c94-994e-4a8f-91f1-23642503d8d9",
+  avatar4:
+    "https://www.figma.com/api/mcp/asset/ba8e3192-8c1a-4388-baa8-a512da31e094",
+  avatar5:
+    "https://www.figma.com/api/mcp/asset/6d0896e4-c001-4785-806b-e2b3e7943f21",
+  msgAvatar1:
+    "https://www.figma.com/api/mcp/asset/047eac11-c15a-4d40-bf4b-3c6cc159b4de",
+  msgAvatar2:
+    "https://www.figma.com/api/mcp/asset/f2fad4c6-fd43-4ef4-8d70-4cf117c31970",
 };
 
 const USERS = [
-  { id: 1, name: '이규학',  role: '학습자', level: 7, avatar: assets.avatarBook, iconProfile: true,  online: false },
-  { id: 2, name: '사용자 2', role: '학습자', level: 5, avatar: assets.avatar2,   iconProfile: false, online: true  },
-  { id: 3, name: '사용자 3', role: '학습자', level: 7, avatar: assets.avatar3,   iconProfile: false, online: true  },
-  { id: 4, name: '사용자 4', role: '학습자', level: 7, avatar: assets.avatar4,   iconProfile: false, online: true  },
-  { id: 5, name: '사용자 5', role: '학습자', level: 8, avatar: assets.avatar5,   iconProfile: false, online: true  },
-  { id: 6, name: '사용자 6', role: '학습자', level: 7, avatar: assets.avatarBook, iconProfile: true, online: false },
+  {
+    id: 1,
+    name: "이규학",
+    role: "학습자",
+    level: 7,
+    avatar: assets.avatarBook,
+    iconProfile: true,
+    online: false,
+  },
+  {
+    id: 2,
+    name: "사용자 2",
+    role: "학습자",
+    level: 5,
+    avatar: assets.avatar2,
+    iconProfile: false,
+    online: true,
+  },
+  {
+    id: 3,
+    name: "사용자 3",
+    role: "학습자",
+    level: 7,
+    avatar: assets.avatar3,
+    iconProfile: false,
+    online: true,
+  },
+  {
+    id: 4,
+    name: "사용자 4",
+    role: "학습자",
+    level: 7,
+    avatar: assets.avatar4,
+    iconProfile: false,
+    online: true,
+  },
+  {
+    id: 5,
+    name: "사용자 5",
+    role: "학습자",
+    level: 8,
+    avatar: assets.avatar5,
+    iconProfile: false,
+    online: true,
+  },
+  {
+    id: 6,
+    name: "사용자 6",
+    role: "학습자",
+    level: 7,
+    avatar: assets.avatarBook,
+    iconProfile: true,
+    online: false,
+  },
 ];
 
 const MESSAGES = [
-  { id: 1, type: 'other', sender: '상대방', avatar: assets.msgAvatar1, content: '메세지 메세지', time: '14:02' },
-  { id: 2, type: 'other', sender: '상대방', avatar: assets.msgAvatar2, content: '메세지 메세지', time: '14:02' },
-  { id: 3, type: 'other', sender: '상대방', avatar: assets.msgAvatar1, content: '여러줄 메세지 여러줄 메세지 여러줄 메세지 여러줄 메세지 여러줄 메세지 여러줄 메세지 여러줄 메세지', time: '14:02' },
-  { id: 4, type: 'mine',  content: '안녕하세요! 오늘도 열공해요 💪', time: '15:00' },
-  { id: 5, type: 'other', sender: '상대방', avatar: assets.msgAvatar2, content: '메세지 메세지', time: '14:02' },
-  { id: 6, type: 'mine',  content: '안녕하세요! 오늘도 열공해요 💪안녕하세요! 오늘도 열공해안녕하세요! 오늘도 열공해', time: '15:00' },
+  {
+    id: 1,
+    type: "other",
+    sender: "상대방",
+    avatar: assets.msgAvatar1,
+    content: "메세지 메세지",
+    time: "14:02",
+  },
+  {
+    id: 2,
+    type: "other",
+    sender: "상대방",
+    avatar: assets.msgAvatar2,
+    content: "메세지 메세지",
+    time: "14:02",
+  },
+  {
+    id: 3,
+    type: "other",
+    sender: "상대방",
+    avatar: assets.msgAvatar1,
+    content:
+      "여러줄 메세지 여러줄 메세지 여러줄 메세지 여러줄 메세지 여러줄 메세지 여러줄 메세지 여러줄 메세지",
+    time: "14:02",
+  },
+  {
+    id: 4,
+    type: "mine",
+    content: "안녕하세요! 오늘도 열공해요 💪",
+    time: "15:00",
+  },
+  {
+    id: 5,
+    type: "other",
+    sender: "상대방",
+    avatar: assets.msgAvatar2,
+    content: "메세지 메세지",
+    time: "14:02",
+  },
+  {
+    id: 6,
+    type: "mine",
+    content:
+      "안녕하세요! 오늘도 열공해요 💪안녕하세요! 오늘도 열공해안녕하세요! 오늘도 열공해",
+    time: "15:00",
+  },
 ];
 
 const TAGS = [
-  { label: '#수어기초', bg: colors.primaryLight,    color: colors.primary },
-  { label: '#일상수어', bg: colors.liveBg,          color: colors.live    },
-  { label: '#일상회화', bg: colors.liveBg,          color: colors.live    },
-  { label: '#일상수어', bg: colors.liveBg,          color: colors.live    },
-  { label: '#질문환영', bg: colors.tagOrangeLightBg, color: colors.orange  },
-  { label: '#초보환영', bg: colors.purpleBg,         color: colors.purple  },
+  { label: "#수어기초", bg: colors.primaryLight, color: colors.primary },
+  { label: "#일상수어", bg: colors.liveBg, color: colors.live },
+  { label: "#일상회화", bg: colors.liveBg, color: colors.live },
+  { label: "#일상수어", bg: colors.liveBg, color: colors.live },
+  { label: "#질문환영", bg: colors.tagOrangeLightBg, color: colors.orange },
+  { label: "#초보환영", bg: colors.purpleBg, color: colors.purple },
 ];
 
 // ─── Page wrapper ──────────────────────────────────────────────────────────────
@@ -70,7 +175,11 @@ const Popup = styled.div`
 // ─── Header ────────────────────────────────────────────────────────────────────
 
 const Header = styled.div`
-  background: linear-gradient(175.28deg, ${colors.primaryDark} 0%, ${colors.primary} 100%);
+  background: linear-gradient(
+    175.28deg,
+    ${colors.primaryDark} 0%,
+    ${colors.primary} 100%
+  );
   border-radius: ${radius.card} ${radius.card} 0 0;
   display: flex;
   align-items: center;
@@ -166,7 +275,10 @@ const TodayMsgRow = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  img { width: 16px; height: 16px; }
+  img {
+    width: 16px;
+    height: 16px;
+  }
 `;
 
 const TodayMsgText = styled.p`
@@ -210,7 +322,11 @@ const MinimizeBtn = styled.button`
   justify-content: center;
   cursor: pointer;
   overflow: hidden;
-  img { width: 40%; height: 40%; object-fit: contain; }
+  img {
+    width: 40%;
+    height: 40%;
+    object-fit: contain;
+  }
 `;
 
 const CloseBtn = styled.button`
@@ -223,7 +339,10 @@ const CloseBtn = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  img { width: 8px; height: 9px; }
+  img {
+    width: 8px;
+    height: 9px;
+  }
 `;
 
 // ─── Body ──────────────────────────────────────────────────────────────────────
@@ -292,9 +411,12 @@ const UserItem = styled.div`
   cursor: pointer;
   padding: 2px 4px;
   border-radius: 8px;
-  background: ${({ $selected }) => $selected ? colors.primaryLight : 'transparent'};
+  background: ${({ $selected }) =>
+    $selected ? colors.primaryLight : "transparent"};
   transition: background 0.15s;
-  &:hover { background: ${colors.primaryLight}; }
+  &:hover {
+    background: ${colors.primaryLight};
+  }
 `;
 
 const UserProfileRow = styled.div`
@@ -314,9 +436,9 @@ const AvatarImg = styled.img`
   width: 30px;
   height: 30px;
   border-radius: 8px;
-  object-fit: ${({ $isIcon }) => $isIcon ? 'contain' : 'cover'};
+  object-fit: ${({ $isIcon }) => ($isIcon ? "contain" : "cover")};
   background: ${colors.bgSection};
-  padding: ${({ $isIcon }) => $isIcon ? '6px' : '0'};
+  padding: ${({ $isIcon }) => ($isIcon ? "6px" : "0")};
 `;
 
 const OnlineDot = styled.img`
@@ -559,9 +681,9 @@ const PanelSection = styled.div`
   padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: ${({ $gap }) => $gap || '8px'};
-  align-items: ${({ $center }) => $center ? 'center' : 'flex-start'};
-  flex: ${({ $flex }) => $flex || 'none'};
+  gap: ${({ $gap }) => $gap || "8px"};
+  align-items: ${({ $center }) => ($center ? "center" : "flex-start")};
+  flex: ${({ $flex }) => $flex || "none"};
 `;
 
 const LastSection = styled(PanelSection)`
@@ -654,7 +776,9 @@ const IntroText = styled.div`
   line-height: 20px;
   letter-spacing: -0.24px;
   color: ${colors.textMain};
-  p { margin: 0; }
+  p {
+    margin: 0;
+  }
 `;
 
 const TagGrid = styled.div`
@@ -724,7 +848,9 @@ const PanelBtn = styled.button`
   font-size: ${fonts.size.sm};
   line-height: 20px;
   color: ${colors.textSub};
-  transition: border-color 0.15s, color 0.15s;
+  transition:
+    border-color 0.15s,
+    color 0.15s;
   &:hover {
     border-color: ${colors.primary};
     color: ${colors.primary};
@@ -745,9 +871,9 @@ const UserInfoAvatarBox = styled.div`
     width: 36px;
     height: 36px;
     border-radius: 8px;
-    object-fit: ${({ $isIcon }) => $isIcon ? 'contain' : 'cover'};
+    object-fit: ${({ $isIcon }) => ($isIcon ? "contain" : "cover")};
     background: ${colors.bgSection};
-    padding: ${({ $isIcon }) => $isIcon ? '4px' : '0'};
+    padding: ${({ $isIcon }) => ($isIcon ? "4px" : "0")};
   }
 `;
 
@@ -790,7 +916,7 @@ const PopupChatScreen = () => {
   const [selectedUser, setSelectedUser] = useState(null);
 
   const handleUserClick = (user) => {
-    setSelectedUser(prev => prev?.id === user.id ? null : user);
+    setSelectedUser((prev) => (prev?.id === user.id ? null : user));
   };
 
   return (
@@ -821,8 +947,12 @@ const PopupChatScreen = () => {
           </HeaderLeft>
           <HeaderRight>
             <LeaveBtn>채팅방 나가기</LeaveBtn>
-            <MinimizeBtn><img src={assets.minimizeV} alt="최소화" /></MinimizeBtn>
-            <CloseBtn><img src={assets.closeV} alt="닫기" /></CloseBtn>
+            <MinimizeBtn>
+              <img src={assets.minimizeV} alt="최소화" />
+            </MinimizeBtn>
+            <CloseBtn>
+              <img src={assets.closeV} alt="닫기" />
+            </CloseBtn>
           </HeaderRight>
         </Header>
 
@@ -836,7 +966,7 @@ const PopupChatScreen = () => {
             </ParticipantHeader>
             <Divider />
             <UserList>
-              {USERS.map(user => (
+              {USERS.map((user) => (
                 <UserItem
                   key={user.id}
                   $selected={selectedUser?.id === user.id}
@@ -849,7 +979,9 @@ const PopupChatScreen = () => {
                         alt={user.name}
                         $isIcon={user.iconProfile}
                       />
-                      {user.online && <OnlineDot src={assets.onlineDot} alt="" />}
+                      {user.online && (
+                        <OnlineDot src={assets.onlineDot} alt="" />
+                      )}
                     </AvatarWrap>
                     <UserMeta>
                       <UserNameText>{user.name}</UserNameText>
@@ -865,8 +997,8 @@ const PopupChatScreen = () => {
           {/* 채팅 중앙부 */}
           <CenterPanel>
             <MessagesArea>
-              {MESSAGES.map(msg =>
-                msg.type === 'other' ? (
+              {MESSAGES.map((msg) =>
+                msg.type === "other" ? (
                   <OtherMsgWrap key={msg.id}>
                     <MsgAvatar src={msg.avatar} alt={msg.sender} />
                     <MsgContentCol>
@@ -886,7 +1018,7 @@ const PopupChatScreen = () => {
                       <MyBubbleText>{msg.content}</MyBubbleText>
                     </MyBubble>
                   </MyMsgRow>
-                )
+                ),
               )}
             </MessagesArea>
             <InputArea>
@@ -894,7 +1026,7 @@ const PopupChatScreen = () => {
                 <AttachIcons>
                   <AttachIcon src={assets.emojiIcon} alt="이모지" />
                   <AttachIcon src={assets.imageIcon} alt="이미지" />
-                  <AttachIcon src={assets.linkIcon}  alt="링크" />
+                  <AttachIcon src={assets.linkIcon} alt="링크" />
                 </AttachIcons>
                 <AttachDivider />
                 <AttachIcon src={assets.signIcon} alt="수어" />
@@ -974,7 +1106,9 @@ const PopupChatScreen = () => {
                   <SectionLabel>태그</SectionLabel>
                   <TagGrid>
                     {TAGS.map((tag, i) => (
-                      <Tag key={i} $bg={tag.bg} $color={tag.color}>{tag.label}</Tag>
+                      <Tag key={i} $bg={tag.bg} $color={tag.color}>
+                        {tag.label}
+                      </Tag>
                     ))}
                   </TagGrid>
                 </PanelSection>

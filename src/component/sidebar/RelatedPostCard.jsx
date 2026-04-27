@@ -1,10 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faCommentDots } from '@fortawesome/free-solid-svg-icons';
-import { colors, fonts, radius } from '../../styles/theme';
+import React from "react";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faCommentDots } from "@fortawesome/free-solid-svg-icons";
+import { colors, fonts, radius } from "../../styles/themeOriginal";
 
-const defaultPostIcon = 'https://www.figma.com/api/mcp/asset/020e0f66-1d95-461e-9604-907bd4d5c27d';
+const defaultPostIcon =
+  "https://www.figma.com/api/mcp/asset/020e0f66-1d95-461e-9604-907bd4d5c27d";
 
 const Wrapper = styled.div`
   display: flex;
@@ -99,8 +100,8 @@ const StatItem = styled.div`
 
 const RelatedPostCard = ({
   icon = defaultPostIcon,
-  title = '관련 게시글',
-  description = '헷갈리는 것만 모았어요',
+  title = "관련 게시글",
+  description = "헷갈리는 것만 모았어요",
   likes = 1,
   comments = 1,
   onClick,

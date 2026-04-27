@@ -1,18 +1,20 @@
-import React from 'react';
-import styled from 'styled-components';
-import { colors, fonts, radius, shadows } from '../styles/theme';
+import React from "react";
+import styled from "styled-components";
+import theme from "../styles/theme";
 
 const Card = styled.div`
   display: flex;
   flex-direction: column;
   width: 312px;
-  border-radius: ${radius.card};
+  border-radius: 20px;
   overflow: hidden;
   cursor: pointer;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 
   &:hover {
-    box-shadow: ${shadows.cardHover};
+    box-shadow: 0 8px 24px rgba(67, 89, 252, 0.18);
     transform: translateY(-2px);
   }
 `;
@@ -20,12 +22,12 @@ const Card = styled.div`
 const CardHeader = styled.div`
   width: 100%;
   height: 110px;
-  background: ${colors.gradientCard};
+  background: ${theme.GRADIENT.lightBlue};
   flex-shrink: 0;
 `;
 
 const CardBody = styled.div`
-  background: ${colors.bgCard};
+  background: ${theme.PALETTE.white};
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -36,8 +38,8 @@ const LiveBadge = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
-  background: ${colors.liveBg};
-  border-radius: ${radius.pill};
+  background: #e8f9e9;
+  border-radius: 100px;
   padding: 4px 8px;
   width: fit-content;
 `;
@@ -46,15 +48,14 @@ const LiveDot = styled.div`
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: ${colors.live};
+  background: ${theme.PALETTE.secondary.main};
   flex-shrink: 0;
 `;
 
 const LiveText = styled.span`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.xs};
-  color: ${colors.live};
+  font-weight: ${theme.FONT_WEIGHT.bold};
+  font-size: ${theme.FONT_SIZE.h12};
+  color: ${theme.PALETTE.secondary.main};
   white-space: nowrap;
 `;
 
@@ -65,19 +66,17 @@ const InfoArea = styled.div`
 `;
 
 const RoomTitle = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.medium};
-  font-size: ${fonts.size.xxl};
-  color: ${colors.textMain};
+  font-weight: ${theme.FONT_WEIGHT.medium};
+  font-size: ${theme.FONT_SIZE.h7};
+  color: ${theme.TEXT_COLOR.basic};
   margin: 0;
   line-height: 1;
 `;
 
 const RoomDescription = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.md};
-  color: ${colors.textSub};
+  font-weight: ${theme.FONT_WEIGHT.regular};
+  font-size: ${theme.FONT_SIZE.h10};
+  color: ${theme.GRAYSCALE[9]};
   margin: 8px 0 0 0;
   line-height: 24px;
 `;
@@ -85,7 +84,7 @@ const RoomDescription = styled.p`
 const Divider = styled.hr`
   width: 100%;
   border: none;
-  border-top: 1px solid ${colors.border};
+  border-top: 1px solid ${theme.GRAYSCALE[8]};
   margin: 0;
 `;
 
@@ -100,30 +99,27 @@ const ParticipantInfo = styled.div`
   display: flex;
   align-items: center;
   gap: 0;
-  font-size: ${fonts.size.sm};
+  font-size: ${theme.FONT_SIZE.h11};
 `;
 
 const ParticipantLabel = styled.span`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  color: ${colors.textMain};
+  font-weight: ${theme.FONT_WEIGHT.regular};
+  color: ${theme.TEXT_COLOR.basic};
 `;
 
 const ParticipantCount = styled.span`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  color: ${colors.primary};
+  font-weight: ${theme.FONT_WEIGHT.bold};
+  color: ${theme.PALETTE.primary.main};
   margin-left: 4px;
 `;
 
 const JoinButton = styled.button`
-  background: ${colors.primaryLight};
-  color: ${colors.primary};
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.sm};
+  background: ${theme.PALETTE.primary.extraLight};
+  color: ${theme.PALETTE.primary.main};
+  font-weight: ${theme.FONT_WEIGHT.bold};
+  font-size: ${theme.FONT_SIZE.h11};
   border: none;
-  border-radius: ${radius.sm};
+  border-radius: 10px;
   padding: 6px 16px;
   cursor: pointer;
   white-space: nowrap;
@@ -135,9 +131,9 @@ const JoinButton = styled.button`
 `;
 
 const LiveChatCard = ({
-  title = '수어 학습 질문방',
-  description = '수어 학습 중 궁금한 점을 함께 해결해요. 초보자도 편하게!',
-  participantCount = '00',
+  title = "수어 학습 질문방",
+  description = "수어 학습 중 궁금한 점을 함께 해결해요. 초보자도 편하게!",
+  participantCount = "00",
   isLive = true,
   onJoin,
 }) => {
@@ -152,7 +148,9 @@ const LiveChatCard = ({
               <LiveText>라이브</LiveText>
             </LiveBadge>
           )}
-          <RoomTitle style={{ marginTop: isLive ? '8px' : '0' }}>{title}</RoomTitle>
+          <RoomTitle style={{ marginTop: isLive ? "8px" : "0" }}>
+            {title}
+          </RoomTitle>
           <RoomDescription>{description}</RoomDescription>
         </InfoArea>
         <Divider />

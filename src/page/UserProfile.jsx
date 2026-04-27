@@ -8,7 +8,13 @@ import {
   faMagnifyingGlass,
   faFileLines,
 } from "@fortawesome/free-solid-svg-icons";
-import { colors, fonts, radius, shadows, layout } from "../styles/theme";
+import {
+  colors,
+  fonts,
+  radius,
+  shadows,
+  layout,
+} from "../styles/themeOriginal";
 import PostListCard from "../component/PostListCard";
 
 /* ── Figma 에셋 URL (7일 TTL) ── */
@@ -52,9 +58,8 @@ const POSTS = [
     id: 3,
     category: "학습 인증",
     time: "방금 전",
-    title: "수어에서 감정 표현할 때 표정이 얼마나 중요한가요?",
-    description:
-      "수어에서 표정과 몸짓이 단어만큼 중요하다고 들었는데 실제로 어느 정도 비중을 두어야 할수어에서 표정과 몸짓이 단어만큼 중요하다고 들었는데 실제제제제제제제제제제제제제 ㅇㅇㅇㅇㅇㅇㅇㅇ...",
+    title: "규학이라는 친구가 도와줬어여",
+    description: "덕분에 수어를 잘 할 수 있게 되었어요.",
     thumbnail: null,
     likes: 42,
     comments: 18,
@@ -418,156 +423,6 @@ const SortBtn = styled.button`
   color: ${colors.textSub};
   cursor: pointer;
   white-space: nowrap;
-`;
-
-/* ── 게시글 카드 ── */
-const PostCard = styled.article`
-  background: ${colors.bgCard};
-  border-radius: ${radius.card};
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  box-shadow: ${shadows.card};
-`;
-
-const PostCardTop = styled.div`
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-`;
-
-const CategoryTag = styled.span`
-  background: ${colors.primary};
-  border-radius: ${radius.pill};
-  padding: 2px 8px;
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.xs};
-  color: ${colors.textWhite};
-  line-height: 16px;
-  letter-spacing: 0.1px;
-`;
-
-const PostTime = styled.span`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.medium};
-  font-size: ${fonts.size.sm};
-  color: ${colors.textSub};
-`;
-
-const PostCardMid = styled.div`
-  margin-top: 16px;
-  display: flex;
-  gap: 28px;
-  align-items: flex-start;
-`;
-
-const PostContentArea = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-`;
-
-const PostTitle = styled.h2`
-  margin: 0;
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.xxxl};
-  color: ${colors.textMain};
-  letter-spacing: -0.84px;
-  line-height: normal;
-`;
-
-const PostDescription = styled.p`
-  margin: 0;
-  font-family: ${fonts.family};
-  font-size: ${fonts.size.lg};
-  color: ${colors.textSub};
-  line-height: 28px;
-  letter-spacing: -0.54px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-`;
-
-const PostThumbnail = styled.div`
-  width: 96px;
-  height: 96px;
-  border-radius: ${radius.card};
-  background: ${colors.bgThumbnail};
-  overflow: hidden;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-`;
-
-const PostThumbnailImg = styled.img`
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
-
-const ThumbnailDefault = styled.img`
-  width: 50px;
-  height: auto;
-`;
-
-const PostCardBottom = styled.div`
-  margin-top: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const AuthorInfo = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-`;
-
-const AuthorAvatar = styled.img`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-`;
-
-const AuthorName = styled.span`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.base};
-  color: ${colors.textMain};
-  letter-spacing: 0.32px;
-`;
-
-const PostStats = styled.div`
-  display: flex;
-  gap: 12px;
-  align-items: center;
-`;
-
-const StatItem = styled.div`
-  display: flex;
-  gap: 4px;
-  align-items: center;
-`;
-
-const StatIcon = styled.span`
-  font-size: ${fonts.size.sm};
-  color: ${colors.textSub};
-  display: flex;
-  align-items: center;
-`;
-
-const StatCount = styled.span`
-  font-family: ${fonts.family};
-  font-size: ${fonts.size.sm};
-  color: ${colors.textMain};
 `;
 
 /* ── 페이지네이션 ── */
@@ -983,47 +838,6 @@ const UserProfile = () => {
                   comments={comments}
                   views={views}
                 ></PostListCard>
-                // <PostCard key={post.id}>
-                //   <PostCardTop>
-                //     <CategoryTag>{post.category}</CategoryTag>
-                //     <PostTime>{post.time}</PostTime>
-                //   </PostCardTop>
-
-                //   <PostCardMid>
-                //     <PostContentArea>
-                //       <PostTitle>{post.title}</PostTitle>
-                //       <PostDescription>{post.description}</PostDescription>
-                //     </PostContentArea>
-                //     <PostThumbnail>
-                //       {post.thumbnail ? (
-                //         <PostThumbnailImg src={post.thumbnail} alt="게시글 이미지" />
-                //       ) : (
-                //         <ThumbnailDefault src={imgDefaultThumb} alt="" />
-                //       )}
-                //     </PostThumbnail>
-                //   </PostCardMid>
-
-                //   <PostCardBottom>
-                //     <AuthorInfo>
-                //       <AuthorAvatar src={imgUserSmall} alt="작성자 아바타" />
-                //       <AuthorName>말하려는 여우</AuthorName>
-                //     </AuthorInfo>
-                //     <PostStats>
-                //       <StatItem>
-                //         <StatIcon><FontAwesomeIcon icon={faHeart} /></StatIcon>
-                //         <StatCount>{post.likes}</StatCount>
-                //       </StatItem>
-                //       <StatItem>
-                //         <StatIcon><FontAwesomeIcon icon={faComment} /></StatIcon>
-                //         <StatCount>{post.comments}</StatCount>
-                //       </StatItem>
-                //       <StatItem>
-                //         <StatIcon><FontAwesomeIcon icon={faEye} /></StatIcon>
-                //         <StatCount>{post.views}</StatCount>
-                //       </StatItem>
-                //     </PostStats>
-                //   </PostCardBottom>
-                // </PostCard>
               ),
             )}
 

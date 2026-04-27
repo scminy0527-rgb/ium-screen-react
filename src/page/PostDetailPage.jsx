@@ -1,16 +1,20 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import PostContent from '../component/post/PostContent';
-import CommentSection from '../component/post/CommentSection';
-import PostSidebar from '../component/sidebar/PostSidebar';
-import FloatingChatButton from '../component/common/FloatingChatButton';
-import { colors, fonts, radius, layout } from '../styles/theme';
+import React from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import PostContent from "../component/post/PostContent";
+import CommentSection from "../component/post/CommentSection";
+import PostSidebar from "../component/sidebar/PostSidebar";
+import FloatingChatButton from "../component/common/FloatingChatButton";
+import { colors, fonts, radius, layout } from "../styles/themeOriginal";
 
-const logoSignImg = 'https://www.figma.com/api/mcp/asset/f1c1ea36-5c4a-4dae-997d-7df6c8877438';
-const youtubeLogoImg = 'https://www.figma.com/api/mcp/asset/e073444c-42eb-42c6-b15c-dc04466d31c2';
-const naverLogoImg = 'https://www.figma.com/api/mcp/asset/cb0bac58-70c1-41df-b8d5-9259540bfbab';
-const instagramLogoImg = 'https://www.figma.com/api/mcp/asset/af47c64f-cc7f-4bc0-b21a-1841ec9e5861';
+const logoSignImg =
+  "https://www.figma.com/api/mcp/asset/f1c1ea36-5c4a-4dae-997d-7df6c8877438";
+const youtubeLogoImg =
+  "https://www.figma.com/api/mcp/asset/e073444c-42eb-42c6-b15c-dc04466d31c2";
+const naverLogoImg =
+  "https://www.figma.com/api/mcp/asset/cb0bac58-70c1-41df-b8d5-9259540bfbab";
+const instagramLogoImg =
+  "https://www.figma.com/api/mcp/asset/af47c64f-cc7f-4bc0-b21a-1841ec9e5861";
 
 /* ── Page wrapper ── */
 const Page = styled.div`
@@ -89,8 +93,10 @@ const HeaderBtn = styled.button`
   border-radius: ${radius.sm};
   cursor: pointer;
   white-space: nowrap;
-  background: ${({ variant }) => (variant === 'filled' ? colors.primary : colors.bgCard)};
-  color: ${({ variant }) => (variant === 'filled' ? colors.textWhite : colors.primary)};
+  background: ${({ variant }) =>
+    variant === "filled" ? colors.primary : colors.bgCard};
+  color: ${({ variant }) =>
+    variant === "filled" ? colors.textWhite : colors.primary};
   border: 2px solid ${colors.primary};
   transition: opacity 0.2s;
 
@@ -114,7 +120,7 @@ const Crumb = styled.span`
   font-size: ${fonts.size.sm};
   color: ${({ current }) => (current ? colors.textMain : colors.textSub)};
   white-space: nowrap;
-  cursor: ${({ current }) => (current ? 'default' : 'pointer')};
+  cursor: ${({ current }) => (current ? "default" : "pointer")};
 `;
 
 const CrumbSep = styled.span`
@@ -238,7 +244,7 @@ const PostDetailPage = () => {
   return (
     <Page>
       <Header>
-        <LogoArea onClick={() => navigate('/')}>
+        <LogoArea onClick={() => navigate("/")}>
           <LogoSign src={logoSignImg} alt="이음 로고" />
           <LogoText>이음</LogoText>
         </LogoArea>
@@ -263,7 +269,9 @@ const PostDetailPage = () => {
         <CrumbSep>›</CrumbSep>
         <Crumb>학습 인증</Crumb>
         <CrumbSep>›</CrumbSep>
-        <Crumb current>수어 알파벳 완전 마스터! 1달 열공 후기 남깁니다 🙌</Crumb>
+        <Crumb current>
+          수어 알파벳 완전 마스터! 1달 열공 후기 남깁니다 🙌
+        </Crumb>
       </BreadcrumbBar>
 
       <ContentArea>
@@ -301,7 +309,7 @@ const PostDetailPage = () => {
           <FooterInfo>대표 : 노규호 외 4명</FooterInfo>
           <FooterInfo>사업자등록번호 : 123-45-67890</FooterInfo>
         </FooterInfoRow>
-        <FooterInfoRow style={{ marginTop: '8px' }}>
+        <FooterInfoRow style={{ marginTop: "8px" }}>
           <FooterInfo>주소 : 서울특별시 마포구 백범로 130</FooterInfo>
           <FooterInfo>광고·제휴문의 : code-kine@gmail.com</FooterInfo>
         </FooterInfoRow>

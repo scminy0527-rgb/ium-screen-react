@@ -1,24 +1,27 @@
-import React from 'react';
-import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faComment, faEye } from '@fortawesome/free-solid-svg-icons';
-import { colors, fonts, radius, shadows, layout } from '../styles/theme';
+import React from "react";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faComment, faEye } from "@fortawesome/free-solid-svg-icons";
+import theme from "../styles/theme";
 
 const Card = styled.div`
-  background: ${colors.bgCard};
-  border-radius: ${radius.card};
+  background: ${theme.PALETTE.white};
+  border-radius: 20px;
   padding: 40px;
-  width: ${layout.cardMaxWidth};
+  width: 984px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   border: 2px solid transparent;
   cursor: pointer;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 
   &:hover {
-    border-color: ${colors.primary};
-    box-shadow: ${shadows.card};
+    border-color: ${theme.PALETTE.primary.main};
+    box-shadow: 0 8px 24px rgba(67, 89, 252, 0.12);
     transform: translateY(-2px);
   }
 `;
@@ -31,23 +34,21 @@ const TopRow = styled.div`
 `;
 
 const Tag = styled.span`
-  background: ${colors.primary};
-  color: ${colors.textWhite};
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.xs};
+  background: ${theme.PALETTE.primary.main};
+  color: ${theme.PALETTE.white};
+  font-weight: ${theme.FONT_WEIGHT.bold};
+  font-size: ${theme.FONT_SIZE.h12};
   letter-spacing: 0.1px;
   line-height: 16px;
-  border-radius: ${radius.pill};
+  border-radius: 100px;
   padding: 2px 8px;
   white-space: nowrap;
 `;
 
 const TimeText = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.medium};
-  font-size: ${fonts.size.sm};
-  color: ${colors.textSub};
+  font-weight: ${theme.FONT_WEIGHT.medium};
+  font-size: ${theme.FONT_SIZE.h11};
+  color: ${theme.GRAYSCALE[9]};
   margin: 0;
   white-space: nowrap;
 `;
@@ -68,20 +69,18 @@ const ContentArea = styled.div`
 `;
 
 const Title = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.xxxl};
-  color: ${colors.textMain};
+  font-weight: ${theme.FONT_WEIGHT.bold};
+  font-size: ${theme.FONT_SIZE.h5};
+  color: ${theme.TEXT_COLOR.basic};
   letter-spacing: -0.84px;
   margin: 0;
   word-break: keep-all;
 `;
 
 const Description = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.lg};
-  color: ${colors.textSub};
+  font-weight: ${theme.FONT_WEIGHT.regular};
+  font-size: ${theme.FONT_SIZE.h8};
+  color: ${theme.GRAYSCALE[9]};
   letter-spacing: -0.54px;
   line-height: 28px;
   margin: 9px 0 0 0;
@@ -94,8 +93,8 @@ const Description = styled.p`
 const Thumbnail = styled.div`
   width: 96px;
   height: 96px;
-  border-radius: ${radius.card};
-  background: ${colors.bgThumbnail};
+  border-radius: 20px;
+  background: ${theme.GRAYSCALE[0]};
   flex-shrink: 0;
   overflow: hidden;
   display: flex;
@@ -131,10 +130,9 @@ const Avatar = styled.img`
 `;
 
 const AuthorName = styled.span`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.base};
-  color: ${colors.textMain};
+  font-weight: ${theme.FONT_WEIGHT.bold};
+  font-size: ${theme.FONT_SIZE.h9};
+  color: ${theme.TEXT_COLOR.basic};
   letter-spacing: 0.32px;
   white-space: nowrap;
 `;
@@ -151,26 +149,25 @@ const StatItem = styled.div`
   gap: 4px;
 
   svg {
-    font-size: ${fonts.size.sm};
-    color: ${colors.textSub};
+    font-size: ${theme.FONT_SIZE.h11};
+    color: ${theme.GRAYSCALE[9]};
   }
 
   span {
-    font-family: ${fonts.family};
-    font-weight: ${fonts.weight.regular};
-    font-size: ${fonts.size.sm};
-    color: ${colors.textMain};
+    font-weight: ${theme.FONT_WEIGHT.regular};
+    font-size: ${theme.FONT_SIZE.h11};
+    color: ${theme.TEXT_COLOR.basic};
     white-space: nowrap;
   }
 `;
 
 const PostListCard = ({
-  tag = '학습 인증',
-  time = '방금 전',
-  title = '수어에서 감정 표현할 때 표정이 얼마나 중요한가요?',
-  content = '수어에서 표정과 몸짓이 단어만큼 중요하다고 들었는데 실제로 어느 정도 비중을 두어야 할지 궁금합니다.',
+  tag = "학습 인증",
+  time = "방금 전",
+  title = "수어에서 감정 표현할 때 표정이 얼마나 중요한가요?",
+  content = "수어에서 표정과 몸짓이 단어만큼 중요하다고 들었는데 실제로 어느 정도 비중을 두어야 할지 궁금합니다.",
   thumbnail = null,
-  authorName = '수어러버김지민',
+  authorName = "수어러버김지민",
   authorAvatar = null,
   likes = 42,
   comments = 18,
