@@ -49,6 +49,14 @@ export const colors = {
   accessibilitySignBg: '#eef1ff',
   accessibilityRead: '#4dc953',
   accessibilityReadBg: '#e8f9e9',
+
+  // 팝업 채팅방 전용
+  purple: '#b63fde',
+  purpleBg: '#e1beec',
+  tagOrangeLightBg: '#fff3e8',
+  dangerOverlay: 'rgba(255, 80, 80, 0.5)',
+  overlayWhite15: 'rgba(255, 255, 255, 0.15)',
+  bgPopupOverlay: '#8e8d8d',
 };
 
 export const fonts = {

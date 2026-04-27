@@ -1,70 +1,76 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart,
   faComment,
   faEye,
   faMagnifyingGlass,
   faFileLines,
-} from '@fortawesome/free-solid-svg-icons';
-import { colors, fonts, radius, shadows, layout } from '../styles/theme';
+} from "@fortawesome/free-solid-svg-icons";
+import { colors, fonts, radius, shadows, layout } from "../styles/theme";
+import PostListCard from "../component/PostListCard";
 
 /* ── Figma 에셋 URL (7일 TTL) ── */
-const imgProfileAvatar = 'https://www.figma.com/api/mcp/asset/7616ba05-a3ee-4444-843d-51e0019d647e';
-const imgPostThumb1    = 'https://www.figma.com/api/mcp/asset/0304e74f-a9d6-4296-b869-93ea9c6b507b';
-const imgUserSmall     = 'https://www.figma.com/api/mcp/asset/eedd2bfb-7438-42f4-8a24-0df7811fe037';
-const imgLogoMark      = 'https://www.figma.com/api/mcp/asset/5a7748d6-22f7-4632-831b-45bc5fe5ea87';
-const imgDefaultThumb  = 'https://www.figma.com/api/mcp/asset/c806458d-aec6-49c0-8a40-0f70b77cb3d4';
+const imgProfileAvatar =
+  "https://www.figma.com/api/mcp/asset/7616ba05-a3ee-4444-843d-51e0019d647e";
+const imgPostThumb1 =
+  "https://www.figma.com/api/mcp/asset/0304e74f-a9d6-4296-b869-93ea9c6b507b";
+const imgUserSmall =
+  "https://www.figma.com/api/mcp/asset/eedd2bfb-7438-42f4-8a24-0df7811fe037";
+const imgLogoMark =
+  "https://www.figma.com/api/mcp/asset/5a7748d6-22f7-4632-831b-45bc5fe5ea87";
+const imgDefaultThumb =
+  "https://www.figma.com/api/mcp/asset/c806458d-aec6-49c0-8a40-0f70b77cb3d4";
 
 /* ── 샘플 데이터 ── */
 const POSTS = [
   {
     id: 1,
-    category: '학습 인증',
-    time: '방금 전',
-    title: '수어에서 감정 표현할 때 표정이 얼마나 중요한가요?',
+    category: "학습 인증",
+    time: "방금 전",
+    title: "수어에서 감정 표현할 때 표정이 얼마나 중요한가요?",
     description:
-      '수어에서 표정과 몸짓이 단어만큼 중요하다고 들었는데 실제로 어느 정도 비중을 두어야 할수어에서 표정과 몸짓이 단어만큼 중요하다고 들었는데 실제제제제제제제제제제제제제 ㅇㅇㅇㅇㅇㅇㅇㅇ...',
+      "수어에서 표정과 몸짓이 단어만큼 중요하다고 들었는데 실제로 어느 정도 비중을 두어야 할수어에서 표정과 몸짓이 단어만큼 중요하다고 들었는데 실제제제제제제제제제제제제제 ㅇㅇㅇㅇㅇㅇㅇㅇ...",
     thumbnail: imgPostThumb1,
     likes: 42,
     comments: 18,
-    views: '9999+',
+    views: "9999+",
   },
   {
     id: 2,
-    category: '학습 인증',
-    time: '방금 전',
-    title: '오늘은 용기내서 말해봤어요',
-    description: '오늘은 그래도 이야기 성공',
+    category: "학습 인증",
+    time: "방금 전",
+    title: "오늘은 용기내서 말해봤어요",
+    description: "오늘은 그래도 이야기 성공",
     thumbnail: null,
     likes: 42,
     comments: 18,
-    views: '9999+',
+    views: "9999+",
   },
   {
     id: 3,
-    category: '학습 인증',
-    time: '방금 전',
-    title: '수어에서 감정 표현할 때 표정이 얼마나 중요한가요?',
+    category: "학습 인증",
+    time: "방금 전",
+    title: "수어에서 감정 표현할 때 표정이 얼마나 중요한가요?",
     description:
-      '수어에서 표정과 몸짓이 단어만큼 중요하다고 들었는데 실제로 어느 정도 비중을 두어야 할수어에서 표정과 몸짓이 단어만큼 중요하다고 들었는데 실제제제제제제제제제제제제제 ㅇㅇㅇㅇㅇㅇㅇㅇ...',
+      "수어에서 표정과 몸짓이 단어만큼 중요하다고 들었는데 실제로 어느 정도 비중을 두어야 할수어에서 표정과 몸짓이 단어만큼 중요하다고 들었는데 실제제제제제제제제제제제제제 ㅇㅇㅇㅇㅇㅇㅇㅇ...",
     thumbnail: null,
     likes: 42,
     comments: 18,
-    views: '9999+',
+    views: "9999+",
   },
   {
     id: 4,
-    category: '학습 인증',
-    time: '방금 전',
-    title: '수어에서 감정 표현할 때 표정이 얼마나 중요한가요?',
+    category: "학습 인증",
+    time: "방금 전",
+    title: "수어에서 감정 표현할 때 표정이 얼마나 중요한가요?",
     description:
-      '수어에서 표정과 몸짓이 단어만큼 중요하다고 들었는데 실제로 어느 정도 비중을 두어야 할수어에서 표정과 몸짓이 단어만큼 중요하다고 들었는데 실제제제제제제제제제제제제제 ㅇㅇㅇㅇㅇㅇㅇㅇ...',
+      "수어에서 표정과 몸짓이 단어만큼 중요하다고 들었는데 실제로 어느 정도 비중을 두어야 할수어에서 표정과 몸짓이 단어만큼 중요하다고 들었는데 실제제제제제제제제제제제제제 ㅇㅇㅇㅇㅇㅇㅇㅇ...",
     thumbnail: null,
     likes: 42,
     comments: 18,
-    views: '9999+',
+    views: "9999+",
   },
 ];
 
@@ -351,7 +357,8 @@ const TabBtn = styled.button`
   padding: 8px;
   border-radius: ${radius.button};
   background: ${({ $active }) => ($active ? colors.primary : colors.bgSection)};
-  border: 1px solid ${({ $active }) => ($active ? colors.primary : colors.border)};
+  border: 1px solid
+    ${({ $active }) => ($active ? colors.primary : colors.border)};
   cursor: pointer;
   flex-shrink: 0;
 `;
@@ -400,8 +407,10 @@ const SortArea = styled.div`
 
 const SortBtn = styled.button`
   padding: 6px 16px;
-  background: ${({ $active }) => ($active ? colors.primaryLight : colors.bgCard)};
-  border: 1px solid ${({ $active }) => ($active ? colors.primary : colors.border)};
+  background: ${({ $active }) =>
+    $active ? colors.primaryLight : colors.bgCard};
+  border: 1px solid
+    ${({ $active }) => ($active ? colors.primary : colors.border)};
   border-radius: ${radius.sm};
   font-family: ${fonts.family};
   font-weight: ${fonts.weight.bold};
@@ -574,11 +583,13 @@ const PageBtn = styled.button`
   width: 36px;
   height: 36px;
   border-radius: ${radius.input};
-  border: 2px solid ${({ $active }) => ($active ? 'transparent' : colors.border)};
-  background: ${({ $active }) => ($active ? colors.primary : 'transparent')};
+  border: 2px solid
+    ${({ $active }) => ($active ? "transparent" : colors.border)};
+  background: ${({ $active }) => ($active ? colors.primary : "transparent")};
   color: ${({ $active }) => ($active ? colors.textWhite : colors.textDark)};
   font-family: ${fonts.family};
-  font-weight: ${({ $active }) => ($active ? fonts.weight.bold : fonts.weight.regular)};
+  font-weight: ${({ $active }) =>
+    $active ? fonts.weight.bold : fonts.weight.regular};
   font-size: ${fonts.size.sm};
   letter-spacing: -0.24px;
   cursor: pointer;
@@ -709,7 +720,8 @@ const ActionBtn = styled.button`
   width: 100%;
   padding: 8px 16px;
   background: ${colors.bgCard};
-  border: 2px solid ${({ $danger }) => ($danger ? colors.orange : colors.border)};
+  border: 2px solid
+    ${({ $danger }) => ($danger ? colors.orange : colors.border)};
   border-radius: ${radius.button};
   font-family: ${fonts.family};
   font-weight: ${fonts.weight.bold};
@@ -814,8 +826,8 @@ const SocialLabel = styled.span`
 ═══════════════════════════════════════════ */
 
 const UserProfile = () => {
-  const [activeTab, setActiveTab] = useState('posts');
-  const [activeSort, setActiveSort] = useState('latest');
+  const [activeTab, setActiveTab] = useState("posts");
+  const [activeSort, setActiveSort] = useState("latest");
 
   return (
     <PageWrapper>
@@ -865,7 +877,8 @@ const UserProfile = () => {
                     <ProfileTag>30일 연속 학습</ProfileTag>
                   </ProfileTagRow>
                   <ProfileBio>
-                    수어를 배우며 세상과 더 넓게 소통하고 싶어요. 매일 조금씩, 꾸준히 나아가는 중입니다 😊
+                    수어를 배우며 세상과 더 넓게 소통하고 싶어요. 매일 조금씩,
+                    꾸준히 나아가는 중입니다 😊
                   </ProfileBio>
                   <ProfileMeta>2025년 2월 가입 · 서울</ProfileMeta>
                 </ProfileTextGroup>
@@ -883,102 +896,146 @@ const UserProfile = () => {
 
             {/* 탭 토글 + 정렬 */}
             <TabSortRow>
-              <TabBtn $active={activeTab === 'posts'} onClick={() => setActiveTab('posts')}>
+              <TabBtn
+                $active={activeTab === "posts"}
+                onClick={() => setActiveTab("posts")}
+              >
                 <TabBtnInner>
-                  <TabBtnIcon $active={activeTab === 'posts'}>
+                  <TabBtnIcon $active={activeTab === "posts"}>
                     <FontAwesomeIcon icon={faFileLines} />
                   </TabBtnIcon>
-                  <TabBtnLabel $active={activeTab === 'posts'}>작성 게시글</TabBtnLabel>
+                  <TabBtnLabel $active={activeTab === "posts"}>
+                    작성 게시글
+                  </TabBtnLabel>
                 </TabBtnInner>
-                <TabBtnCount $active={activeTab === 'posts'}>42</TabBtnCount>
+                <TabBtnCount $active={activeTab === "posts"}>42</TabBtnCount>
               </TabBtn>
 
-              <TabBtn $active={activeTab === 'comments'} onClick={() => setActiveTab('comments')}>
+              <TabBtn
+                $active={activeTab === "comments"}
+                onClick={() => setActiveTab("comments")}
+              >
                 <TabBtnInner>
-                  <TabBtnIcon $active={activeTab === 'comments'}>
+                  <TabBtnIcon $active={activeTab === "comments"}>
                     <FontAwesomeIcon icon={faComment} />
                   </TabBtnIcon>
-                  <TabBtnLabel $active={activeTab === 'comments'}>작성 댓글</TabBtnLabel>
+                  <TabBtnLabel $active={activeTab === "comments"}>
+                    작성 댓글
+                  </TabBtnLabel>
                 </TabBtnInner>
-                <TabBtnCount $active={activeTab === 'comments'}>42</TabBtnCount>
+                <TabBtnCount $active={activeTab === "comments"}>42</TabBtnCount>
               </TabBtn>
 
-              <TabBtn $active={activeTab === 'liked'} onClick={() => setActiveTab('liked')}>
+              <TabBtn
+                $active={activeTab === "liked"}
+                onClick={() => setActiveTab("liked")}
+              >
                 <TabBtnInner>
-                  <TabBtnIcon $active={activeTab === 'liked'}>
+                  <TabBtnIcon $active={activeTab === "liked"}>
                     <FontAwesomeIcon icon={faHeart} />
                   </TabBtnIcon>
-                  <TabBtnLabel $active={activeTab === 'liked'}>좋아요한 글</TabBtnLabel>
+                  <TabBtnLabel $active={activeTab === "liked"}>
+                    좋아요한 글
+                  </TabBtnLabel>
                 </TabBtnInner>
-                <TabBtnCount $active={activeTab === 'liked'}>42</TabBtnCount>
+                <TabBtnCount $active={activeTab === "liked"}>42</TabBtnCount>
               </TabBtn>
 
               <TabSpacer />
 
               <SortArea>
-                <SortBtn $active={activeSort === 'latest'} onClick={() => setActiveSort('latest')}>
+                <SortBtn
+                  $active={activeSort === "latest"}
+                  onClick={() => setActiveSort("latest")}
+                >
                   최신순
                 </SortBtn>
-                <SortBtn $active={activeSort === 'popular'} onClick={() => setActiveSort('popular')}>
+                <SortBtn
+                  $active={activeSort === "popular"}
+                  onClick={() => setActiveSort("popular")}
+                >
                   인기순
                 </SortBtn>
               </SortArea>
             </TabSortRow>
 
             {/* 게시글 목록 */}
-            {POSTS.map((post) => (
-              <PostCard key={post.id}>
-                <PostCardTop>
-                  <CategoryTag>{post.category}</CategoryTag>
-                  <PostTime>{post.time}</PostTime>
-                </PostCardTop>
+            {POSTS.map(
+              ({
+                id,
+                category,
+                time,
+                title,
+                description,
+                thumbnail,
+                likes,
+                comments,
+                views,
+              }) => (
+                <PostListCard
+                  tag={category}
+                  time={time}
+                  title={title}
+                  content={description}
+                  thumbnail={thumbnail}
+                  authorName="수어러버 김지민"
+                  likes={likes}
+                  comments={comments}
+                  views={views}
+                ></PostListCard>
+                // <PostCard key={post.id}>
+                //   <PostCardTop>
+                //     <CategoryTag>{post.category}</CategoryTag>
+                //     <PostTime>{post.time}</PostTime>
+                //   </PostCardTop>
 
-                <PostCardMid>
-                  <PostContentArea>
-                    <PostTitle>{post.title}</PostTitle>
-                    <PostDescription>{post.description}</PostDescription>
-                  </PostContentArea>
-                  <PostThumbnail>
-                    {post.thumbnail ? (
-                      <PostThumbnailImg src={post.thumbnail} alt="게시글 이미지" />
-                    ) : (
-                      <ThumbnailDefault src={imgDefaultThumb} alt="" />
-                    )}
-                  </PostThumbnail>
-                </PostCardMid>
+                //   <PostCardMid>
+                //     <PostContentArea>
+                //       <PostTitle>{post.title}</PostTitle>
+                //       <PostDescription>{post.description}</PostDescription>
+                //     </PostContentArea>
+                //     <PostThumbnail>
+                //       {post.thumbnail ? (
+                //         <PostThumbnailImg src={post.thumbnail} alt="게시글 이미지" />
+                //       ) : (
+                //         <ThumbnailDefault src={imgDefaultThumb} alt="" />
+                //       )}
+                //     </PostThumbnail>
+                //   </PostCardMid>
 
-                <PostCardBottom>
-                  <AuthorInfo>
-                    <AuthorAvatar src={imgUserSmall} alt="작성자 아바타" />
-                    <AuthorName>말하려는 여우</AuthorName>
-                  </AuthorInfo>
-                  <PostStats>
-                    <StatItem>
-                      <StatIcon><FontAwesomeIcon icon={faHeart} /></StatIcon>
-                      <StatCount>{post.likes}</StatCount>
-                    </StatItem>
-                    <StatItem>
-                      <StatIcon><FontAwesomeIcon icon={faComment} /></StatIcon>
-                      <StatCount>{post.comments}</StatCount>
-                    </StatItem>
-                    <StatItem>
-                      <StatIcon><FontAwesomeIcon icon={faEye} /></StatIcon>
-                      <StatCount>{post.views}</StatCount>
-                    </StatItem>
-                  </PostStats>
-                </PostCardBottom>
-              </PostCard>
-            ))}
+                //   <PostCardBottom>
+                //     <AuthorInfo>
+                //       <AuthorAvatar src={imgUserSmall} alt="작성자 아바타" />
+                //       <AuthorName>말하려는 여우</AuthorName>
+                //     </AuthorInfo>
+                //     <PostStats>
+                //       <StatItem>
+                //         <StatIcon><FontAwesomeIcon icon={faHeart} /></StatIcon>
+                //         <StatCount>{post.likes}</StatCount>
+                //       </StatItem>
+                //       <StatItem>
+                //         <StatIcon><FontAwesomeIcon icon={faComment} /></StatIcon>
+                //         <StatCount>{post.comments}</StatCount>
+                //       </StatItem>
+                //       <StatItem>
+                //         <StatIcon><FontAwesomeIcon icon={faEye} /></StatIcon>
+                //         <StatCount>{post.views}</StatCount>
+                //       </StatItem>
+                //     </PostStats>
+                //   </PostCardBottom>
+                // </PostCard>
+              ),
+            )}
 
             {/* 페이지네이션 */}
             <PaginationWrap>
-              <PageBtn>{'<'}</PageBtn>
+              <PageBtn>{"<"}</PageBtn>
               <PageBtn $active>1</PageBtn>
               <PageBtn>2</PageBtn>
               <PageBtn>3</PageBtn>
               <PageBtn>4</PageBtn>
               <PageBtn>5</PageBtn>
-              <PageBtn>{'>'}</PageBtn>
+              <PageBtn>{">"}</PageBtn>
             </PaginationWrap>
           </LeftColumn>
 
@@ -1043,14 +1100,24 @@ const UserProfile = () => {
                 <FooterInfoText>사업자등록번호 : 123-45-67890</FooterInfoText>
               </FooterInfoRow>
               <FooterInfoRow>
-                <FooterInfoText>주소 : 서울특별시 마포구 백범로 130</FooterInfoText>
-                <FooterInfoText>광고·제휴문의 : code-kine@gmail.com</FooterInfoText>
+                <FooterInfoText>
+                  주소 : 서울특별시 마포구 백범로 130
+                </FooterInfoText>
+                <FooterInfoText>
+                  광고·제휴문의 : code-kine@gmail.com
+                </FooterInfoText>
               </FooterInfoRow>
             </FooterInfoSection>
             <SocialIcons>
-              <SocialBtn><SocialLabel>YT</SocialLabel></SocialBtn>
-              <SocialBtn><SocialLabel>N</SocialLabel></SocialBtn>
-              <SocialBtn><SocialLabel>IG</SocialLabel></SocialBtn>
+              <SocialBtn>
+                <SocialLabel>YT</SocialLabel>
+              </SocialBtn>
+              <SocialBtn>
+                <SocialLabel>N</SocialLabel>
+              </SocialBtn>
+              <SocialBtn>
+                <SocialLabel>IG</SocialLabel>
+              </SocialBtn>
             </SocialIcons>
           </FooterBottom>
         </FooterInner>

@@ -4,11 +4,17 @@ import LiveChatCard from "../component/LiveChatCard";
 import ChatSample from "../page/ChatSample";
 import PostDetailPage from "../page/PostDetailPage";
 import UserProfile from "../page/UserProfile";
+import PostWrite from "../page/PostWrite";
+import PopupChatScreen from "../component/PopupChatScreen";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <PostListCard />,
+  },
+  {
+    path: "/community/post/write",
+    element: <PostWrite />,
   },
   {
     path: "/chat-card",
@@ -25,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "/community/user/:id",
     element: <UserProfile />,
+  },
+  {
+    path: "/popup-chat",
+    element: <PopupChatScreen />,
   },
 ]);
 
