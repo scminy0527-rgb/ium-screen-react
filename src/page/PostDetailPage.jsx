@@ -5,7 +5,14 @@ import PostContent from "../component/post/PostContent";
 import CommentSection from "../component/post/CommentSection";
 import PostSidebar from "../component/sidebar/PostSidebar";
 import FloatingChatButton from "../component/common/FloatingChatButton";
-import { colors, fonts, radius, layout } from "../styles/themeOriginal";
+import theme from "../styles/theme";
+import {
+  FONT_FAMILY, FONT_SIZE_EXT,
+  SURFACE, ALPHA, PALETTE_EXT,
+  RADIUS, LAYOUT,
+} from "../constants";
+
+const { PALETTE, GRAYSCALE, TEXT_COLOR, FONT_SIZE, FONT_WEIGHT } = theme;
 
 const logoSignImg =
   "https://www.figma.com/api/mcp/asset/f1c1ea36-5c4a-4dae-997d-7df6c8877438";
@@ -18,7 +25,7 @@ const instagramLogoImg =
 
 /* ── Page wrapper ── */
 const Page = styled.div`
-  background: ${colors.bgSection};
+  background: ${SURFACE.section};
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -26,13 +33,13 @@ const Page = styled.div`
 
 /* ══ Header ══ */
 const Header = styled.header`
-  background: ${colors.bgCard};
-  height: ${layout.headerHeight};
+  background: ${SURFACE.card};
+  height: ${LAYOUT.headerHeight};
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 300px;
-  border-bottom: 1px solid ${colors.border};
+  border-bottom: 1px solid ${GRAYSCALE[8]};
   position: sticky;
   top: 0;
   z-index: 50;
@@ -52,10 +59,10 @@ const LogoSign = styled.img`
 `;
 
 const LogoText = styled.span`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.xl};
-  color: ${colors.primary};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h8};
+  color: ${PALETTE.primary.main};
 `;
 
 const Nav = styled.nav`
@@ -65,16 +72,16 @@ const Nav = styled.nav`
 `;
 
 const NavItem = styled.a`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.md};
-  color: ${colors.primaryDark};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h10};
+  color: ${PALETTE.primary.dark};
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
 
   &:hover {
-    color: ${colors.primary};
+    color: ${PALETTE.primary.main};
   }
 `;
 
@@ -85,19 +92,19 @@ const HeaderButtons = styled.div`
 `;
 
 const HeaderBtn = styled.button`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.md};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h10};
   letter-spacing: -0.28px;
   padding: 8px 16px;
-  border-radius: ${radius.sm};
+  border-radius: ${RADIUS.sm};
   cursor: pointer;
   white-space: nowrap;
   background: ${({ variant }) =>
-    variant === "filled" ? colors.primary : colors.bgCard};
+    variant === "filled" ? PALETTE.primary.main : SURFACE.card};
   color: ${({ variant }) =>
-    variant === "filled" ? colors.textWhite : colors.primary};
-  border: 2px solid ${colors.primary};
+    variant === "filled" ? PALETTE.white : PALETTE.primary.main};
+  border: 2px solid ${PALETTE.primary.main};
   transition: opacity 0.2s;
 
   &:hover {
@@ -108,24 +115,24 @@ const HeaderBtn = styled.button`
 /* ══ Breadcrumb ══ */
 const BreadcrumbBar = styled.div`
   padding: 0 300px;
-  height: ${layout.breadcrumbHeight};
+  height: ${LAYOUT.breadcrumbHeight};
   display: flex;
   align-items: center;
   gap: 4px;
 `;
 
 const Crumb = styled.span`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.sm};
-  color: ${({ current }) => (current ? colors.textMain : colors.textSub)};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.regular};
+  font-size: ${FONT_SIZE.h11};
+  color: ${({ current }) => (current ? TEXT_COLOR.basic : GRAYSCALE[9])};
   white-space: nowrap;
   cursor: ${({ current }) => (current ? "default" : "pointer")};
 `;
 
 const CrumbSep = styled.span`
-  font-size: ${fonts.size.sm};
-  color: ${colors.textSub};
+  font-size: ${FONT_SIZE.h11};
+  color: ${GRAYSCALE[9]};
 `;
 
 /* ══ Main Content ══ */
@@ -148,7 +155,7 @@ const MainSection = styled.div`
 
 /* ══ Footer ══ */
 const Footer = styled.footer`
-  background: ${colors.primaryFooter};
+  background: ${PALETTE_EXT.primaryFooter};
   padding: 40px 300px;
   box-sizing: border-box;
 `;
@@ -167,10 +174,10 @@ const FooterLinks = styled.div`
 `;
 
 const FooterLink = styled.a`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.medium};
-  font-size: ${fonts.size.base};
-  color: ${colors.textWhite};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.medium};
+  font-size: ${FONT_SIZE.h9};
+  color: ${PALETTE.white};
   text-decoration: none;
   cursor: pointer;
 
@@ -182,7 +189,7 @@ const FooterLink = styled.a`
 const FooterLinkDivider = styled.div`
   width: 1px;
   height: 11px;
-  background: ${colors.footerDivider};
+  background: ${ALPHA.white30};
 `;
 
 const SocialLinks = styled.div`
@@ -195,7 +202,7 @@ const SocialBtn = styled.a`
   width: 44px;
   height: 44px;
   border-radius: 22px;
-  border: 1px solid ${colors.footerSocialBorder};
+  border: 1px solid ${ALPHA.white30};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -209,15 +216,15 @@ const SocialBtn = styled.a`
   }
 
   &:hover {
-    border-color: ${colors.textWhite};
+    border-color: ${PALETTE.white};
   }
 `;
 
 const FooterInfoLabel = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.mdLg};
-  color: ${colors.textWhite};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE_EXT.h9_5};
+  color: ${PALETTE.white};
   letter-spacing: -0.48px;
   margin: 0 0 12px 0;
 `;
@@ -230,10 +237,10 @@ const FooterInfoRow = styled.div`
 `;
 
 const FooterInfo = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.smMd};
-  color: ${colors.textWhite};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.regular};
+  font-size: ${FONT_SIZE_EXT.h10_5};
+  color: ${PALETTE.white};
   margin: 0;
   white-space: nowrap;
 `;

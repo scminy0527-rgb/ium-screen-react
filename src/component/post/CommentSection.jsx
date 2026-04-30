@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import CommentItem from "./CommentItem";
-import { colors, fonts, radius } from "../../styles/themeOriginal";
+import theme from "../../styles/theme";
+import { FONT_FAMILY, RADIUS } from "../../constants";
+
+const { PALETTE, GRAYSCALE, TEXT_COLOR, FONT_SIZE, FONT_WEIGHT } = theme;
 
 const profileImg1 =
   "https://www.figma.com/api/mcp/asset/c2cb9995-4cdf-4fcb-97c9-8a6c124289ab";
@@ -24,22 +27,22 @@ const HeaderRow = styled.div`
 `;
 
 const CommentTitle = styled.h2`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.xxxl};
-  color: ${colors.textMain};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h5};
+  color: ${TEXT_COLOR.basic};
   letter-spacing: -0.56px;
   margin: 0;
 `;
 
 const CountBadge = styled.span`
-  background: ${colors.primary};
-  color: ${colors.textWhite};
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.xs};
+  background: ${PALETTE.primary.main};
+  color: ${PALETTE.white};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h12};
   letter-spacing: -0.2px;
-  border-radius: ${radius.pill};
+  border-radius: ${RADIUS.pill};
   padding: 4px 8px;
   white-space: nowrap;
 `;
@@ -47,13 +50,13 @@ const CountBadge = styled.span`
 const TextArea = styled.textarea`
   width: 100%;
   height: 97px;
-  border: 1px solid ${colors.primary};
-  border-radius: ${radius.input};
+  border: 1px solid ${PALETTE.primary.main};
+  border-radius: ${RADIUS.input};
   padding: 16px 24px;
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.md};
-  color: ${colors.textMain};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.regular};
+  font-size: ${FONT_SIZE.h10};
+  color: ${TEXT_COLOR.basic};
   letter-spacing: -0.28px;
   line-height: 22px;
   resize: none;
@@ -61,11 +64,11 @@ const TextArea = styled.textarea`
   box-sizing: border-box;
 
   &::placeholder {
-    color: ${colors.textSub};
+    color: ${GRAYSCALE[9]};
   }
 
   &:focus {
-    border-color: ${colors.primaryDark};
+    border-color: ${PALETTE.primary.dark};
   }
 `;
 
@@ -76,21 +79,21 @@ const SubmitRow = styled.div`
 `;
 
 const SubmitButton = styled.button`
-  background: ${colors.primary};
-  color: ${colors.textWhite};
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.sm};
+  background: ${PALETTE.primary.main};
+  color: ${PALETTE.white};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h11};
   letter-spacing: -0.24px;
   padding: 8px 30px;
-  border-radius: ${radius.sm};
+  border-radius: ${RADIUS.sm};
   border: none;
   cursor: pointer;
   white-space: nowrap;
   transition: background 0.2s ease;
 
   &:hover {
-    background: ${colors.primaryDark};
+    background: ${PALETTE.primary.dark};
   }
 `;
 

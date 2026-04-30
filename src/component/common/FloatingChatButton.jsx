@@ -1,6 +1,9 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import { colors, fonts, radius, shadows } from "../../styles/themeOriginal";
+import theme from "../../styles/theme";
+import { FONT_FAMILY, RADIUS, SHADOW } from "../../constants";
+
+const { PALETTE, GRADIENT, GRAYSCALE, FONT_SIZE, FONT_WEIGHT } = theme;
 
 const handImg =
   "https://www.figma.com/api/mcp/asset/b77bc0e6-7f1a-4a2f-b43d-1188a208d7a8";
@@ -27,19 +30,19 @@ const Button = styled.button`
   align-items: center;
   gap: 18px;
   padding: 16px;
-  border-radius: ${radius.button};
-  background: ${colors.gradientMain};
+  border-radius: ${RADIUS.button};
+  background: ${GRADIENT.deepBlue};
   border: none;
   cursor: pointer;
   overflow: hidden;
-  box-shadow: ${shadows.float};
+  box-shadow: ${SHADOW.float};
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: ${shadows.floatHover};
+    box-shadow: ${SHADOW.floatHover};
   }
 `;
 
@@ -58,10 +61,10 @@ const TextArea = styled.div`
 `;
 
 const RoomTitle = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.md};
-  color: ${colors.textWhite};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h10};
+  color: ${PALETTE.white};
   margin: 0 0 8px 0;
   white-space: nowrap;
 `;
@@ -79,19 +82,19 @@ const LiveDot = styled.img`
 `;
 
 const LiveLabel = styled.span`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.medium};
-  font-size: ${fonts.size.sm};
-  color: ${colors.border};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.medium};
+  font-size: ${FONT_SIZE.h11};
+  color: ${GRAYSCALE[8]};
   margin-left: 6px;
   white-space: nowrap;
 `;
 
 const CountLabel = styled.span`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.medium};
-  font-size: ${fonts.size.sm};
-  color: ${colors.border};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.medium};
+  font-size: ${FONT_SIZE.h11};
+  color: ${GRAYSCALE[8]};
   margin-left: 10px;
   white-space: nowrap;
 `;

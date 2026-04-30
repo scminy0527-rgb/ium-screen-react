@@ -3,7 +3,10 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import RelatedPostCard from "./RelatedPostCard";
 import NoticeItem from "./NoticeItem";
-import { colors, fonts, radius, layout } from "../../styles/themeOriginal";
+import theme from "../../styles/theme";
+import { FONT_FAMILY, SURFACE, RADIUS, LAYOUT } from "../../constants";
+
+const { PALETTE, GRAYSCALE, TEXT_COLOR, FONT_SIZE, FONT_WEIGHT } = theme;
 
 const authorProfileImg =
   "https://www.figma.com/api/mcp/asset/c2cb9995-4cdf-4fcb-97c9-8a6c124289ab";
@@ -15,20 +18,20 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: ${layout.sidebarWidth};
+  width: ${LAYOUT.sidebarWidth};
   flex-shrink: 0;
 `;
 
 /* ── Back Button ── */
 const BackButton = styled.button`
-  background: ${colors.bgCard};
-  border: 2px solid ${colors.border};
-  border-radius: ${radius.button};
+  background: ${SURFACE.card};
+  border: 2px solid ${GRAYSCALE[8]};
+  border-radius: ${RADIUS.button};
   padding: 14px 10px;
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.md};
-  color: ${colors.textSub};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h10};
+  color: ${GRAYSCALE[9]};
   letter-spacing: -0.28px;
   text-align: center;
   width: 100%;
@@ -39,15 +42,15 @@ const BackButton = styled.button`
     color 0.2s;
 
   &:hover {
-    border-color: ${colors.primary};
-    color: ${colors.primary};
+    border-color: ${PALETTE.primary.main};
+    color: ${PALETTE.primary.main};
   }
 `;
 
 /* ── Card base ── */
 const Card = styled.div`
-  background: ${colors.bgCard};
-  border-radius: ${radius.card};
+  background: ${SURFACE.card};
+  border-radius: ${RADIUS.card};
   width: 100%;
 `;
 
@@ -69,10 +72,10 @@ const SectionHeader = styled.div`
 `;
 
 const SectionTitle = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.base};
-  color: ${colors.textMain};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h9};
+  color: ${TEXT_COLOR.basic};
   letter-spacing: -0.32px;
   line-height: 24px;
   margin: 0;
@@ -82,7 +85,7 @@ const SectionTitle = styled.p`
 const Divider = styled.div`
   width: 100%;
   height: 1px;
-  background: ${colors.border};
+  background: ${GRAYSCALE[8]};
 `;
 
 const AuthorProfileBlock = styled.div`
@@ -95,15 +98,15 @@ const AuthorProfileBlock = styled.div`
 const AuthorAvatar = styled.img`
   width: 64px;
   height: 64px;
-  border-radius: ${radius.button};
+  border-radius: ${RADIUS.button};
   object-fit: cover;
 `;
 
 const AuthorName = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.base};
-  color: ${colors.textMain};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h9};
+  color: ${TEXT_COLOR.basic};
   letter-spacing: -0.32px;
   line-height: 24px;
   margin: 0;
@@ -111,21 +114,21 @@ const AuthorName = styled.p`
 `;
 
 const LevelBadge = styled.span`
-  background: ${colors.primaryLight};
-  color: ${colors.primary};
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.sm};
+  background: ${PALETTE.primary.extraLight};
+  color: ${PALETTE.primary.main};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h11};
   letter-spacing: -0.24px;
   line-height: 20px;
   padding: 4px 12px;
-  border-radius: ${radius.pill};
+  border-radius: ${RADIUS.pill};
   white-space: nowrap;
 `;
 
 const StatsRow = styled.div`
-  background: ${colors.bgSection};
-  border-radius: ${radius.button};
+  background: ${SURFACE.section};
+  border-radius: ${RADIUS.button};
   padding: 8px 48px;
   display: flex;
   align-items: center;
@@ -142,10 +145,10 @@ const StatItem = styled.div`
 `;
 
 const StatValue = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.base};
-  color: ${colors.primary};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h9};
+  color: ${PALETTE.primary.main};
   letter-spacing: -0.32px;
   line-height: 24px;
   margin: 0;
@@ -153,10 +156,10 @@ const StatValue = styled.p`
 `;
 
 const StatLabel = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.sm};
-  color: ${colors.textSub};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.regular};
+  font-size: ${FONT_SIZE.h11};
+  color: ${GRAYSCALE[9]};
   letter-spacing: -0.24px;
   line-height: 20px;
   margin: 0;
@@ -164,14 +167,14 @@ const StatLabel = styled.p`
 `;
 
 const OutlineButton = styled.button`
-  background: ${colors.bgCard};
-  border: 2px solid ${colors.primary};
-  border-radius: ${radius.button};
+  background: ${SURFACE.card};
+  border: 2px solid ${PALETTE.primary.main};
+  border-radius: ${RADIUS.button};
   padding: 10px;
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.md};
-  color: ${colors.primary};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h10};
+  color: ${PALETTE.primary.main};
   letter-spacing: -0.28px;
   text-align: center;
   width: 100%;
@@ -182,19 +185,19 @@ const OutlineButton = styled.button`
     color 0.2s;
 
   &:hover {
-    background: ${colors.primaryLight};
+    background: ${PALETTE.primary.extraLight};
   }
 `;
 
 const FilledButton = styled.button`
-  background: ${colors.primary};
+  background: ${PALETTE.primary.main};
   border: none;
-  border-radius: ${radius.button};
+  border-radius: ${RADIUS.button};
   padding: 10px;
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.md};
-  color: ${colors.textWhite};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h10};
+  color: ${PALETTE.white};
   letter-spacing: -0.28px;
   text-align: center;
   width: 100%;
@@ -203,7 +206,7 @@ const FilledButton = styled.button`
   transition: background 0.2s;
 
   &:hover {
-    background: ${colors.primaryDark};
+    background: ${PALETTE.primary.dark};
   }
 `;
 
@@ -224,10 +227,10 @@ const NoticeCard = styled(Card)`
 `;
 
 const NoticeTitleText = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.md};
-  color: ${colors.textMain};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h10};
+  color: ${TEXT_COLOR.basic};
   margin: 0;
   width: 100%;
 `;

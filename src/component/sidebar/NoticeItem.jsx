@@ -1,13 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import { colors, fonts, radius } from "../../styles/themeOriginal";
+import theme from "../../styles/theme";
+import { FONT_FAMILY, SURFACE, RADIUS } from "../../constants";
+
+const { PALETTE, GRAYSCALE, TEXT_COLOR, FONT_SIZE, FONT_WEIGHT } = theme;
 
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: ${colors.bgSection};
-  border-radius: ${radius.input};
+  background: ${SURFACE.section};
+  border-radius: ${RADIUS.input};
   padding: 8px;
   width: 100%;
   box-sizing: border-box;
@@ -23,11 +26,11 @@ const LeftArea = styled.div`
 `;
 
 const Badge = styled.div`
-  background: ${colors.primary};
-  color: ${colors.textWhite};
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.xs};
+  background: ${PALETTE.primary.main};
+  color: ${PALETTE.white};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h12};
   letter-spacing: -0.2px;
   text-align: center;
   padding: 4px 5px;
@@ -37,10 +40,10 @@ const Badge = styled.div`
 `;
 
 const Title = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.sm};
-  color: ${colors.textMain};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.regular};
+  font-size: ${FONT_SIZE.h11};
+  color: ${TEXT_COLOR.basic};
   letter-spacing: -0.24px;
   line-height: 20px;
   margin: 0;
@@ -52,10 +55,10 @@ const Title = styled.p`
 `;
 
 const DateText = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.xs};
-  color: ${colors.textSub};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.regular};
+  font-size: ${FONT_SIZE.h12};
+  color: ${GRAYSCALE[9]};
   letter-spacing: -0.2px;
   text-align: right;
   margin: 0;

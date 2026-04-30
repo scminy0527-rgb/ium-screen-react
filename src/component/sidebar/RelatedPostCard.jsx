@@ -2,7 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faCommentDots } from "@fortawesome/free-solid-svg-icons";
-import { colors, fonts, radius } from "../../styles/themeOriginal";
+import theme from "../../styles/theme";
+import { FONT_FAMILY, SURFACE, RADIUS } from "../../constants";
+
+const { GRAYSCALE, TEXT_COLOR, FONT_SIZE, FONT_WEIGHT } = theme;
 
 const defaultPostIcon =
   "https://www.figma.com/api/mcp/asset/020e0f66-1d95-461e-9604-907bd4d5c27d";
@@ -12,8 +15,8 @@ const Wrapper = styled.div`
   align-items: flex-start;
   gap: 12px;
   padding: 10px 0;
-  border-top: 1px solid ${colors.border};
-  background: ${colors.bgCard};
+  border-top: 1px solid ${GRAYSCALE[8]};
+  background: ${SURFACE.card};
   width: 100%;
   cursor: pointer;
 
@@ -23,8 +26,8 @@ const Wrapper = styled.div`
 `;
 
 const IconBox = styled.div`
-  background: ${colors.bgSection};
-  border-radius: ${radius.input};
+  background: ${SURFACE.section};
+  border-radius: ${RADIUS.input};
   padding: 7px;
   flex-shrink: 0;
   width: 28px;
@@ -50,10 +53,10 @@ const TextArea = styled.div`
 `;
 
 const PostTitle = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.sm};
-  color: ${colors.textMain};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h11};
+  color: ${TEXT_COLOR.basic};
   letter-spacing: -0.24px;
   line-height: 20px;
   margin: 0;
@@ -61,10 +64,10 @@ const PostTitle = styled.p`
 `;
 
 const PostDesc = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.sm};
-  color: ${colors.textMain};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.regular};
+  font-size: ${FONT_SIZE.h11};
+  color: ${TEXT_COLOR.basic};
   letter-spacing: -0.24px;
   line-height: 20px;
   margin: 0;
@@ -85,15 +88,15 @@ const StatItem = styled.div`
   gap: 4px;
 
   svg {
-    font-size: ${fonts.size.sm};
-    color: ${colors.textSub};
+    font-size: ${FONT_SIZE.h11};
+    color: ${GRAYSCALE[9]};
   }
 
   span {
-    font-family: ${fonts.family};
-    font-weight: ${fonts.weight.regular};
-    font-size: ${fonts.size.sm};
-    color: ${colors.textMain};
+    font-family: ${FONT_FAMILY};
+    font-weight: ${FONT_WEIGHT.regular};
+    font-size: ${FONT_SIZE.h11};
+    color: ${TEXT_COLOR.basic};
     white-space: nowrap;
   }
 `;

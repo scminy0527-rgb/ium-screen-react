@@ -2,7 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faCommentDots } from "@fortawesome/free-solid-svg-icons";
-import { colors, fonts, radius } from "../../styles/themeOriginal";
+import theme from "../../styles/theme";
+import { FONT_FAMILY, FONT_SIZE_EXT, SURFACE, ACCESSIBILITY, RADIUS } from "../../constants";
+
+const { PALETTE, GRAYSCALE, TEXT_COLOR, FONT_SIZE, FONT_WEIGHT } = theme;
 
 const reportIconImg =
   "https://www.figma.com/api/mcp/asset/3823b07b-8dff-47fb-9bc5-b1dacb0103e8";
@@ -12,7 +15,7 @@ const Wrapper = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   padding: 16px 0;
-  background: ${colors.bgCard};
+  background: ${SURFACE.card};
   padding-left: ${({ isReply }) => (isReply ? "56px" : "0")};
 `;
 
@@ -28,7 +31,7 @@ const Avatar = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: ${colors.bgSection};
+  background: ${SURFACE.section};
   flex-shrink: 0;
   overflow: hidden;
   display: flex;
@@ -46,12 +49,12 @@ const DefaultAvatar = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: ${colors.primaryLight};
+  background: ${PALETTE.primary.extraLight};
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: ${fonts.size.lg};
+  font-size: ${FONT_SIZE_EXT.h8_5};
 `;
 
 const Body = styled.div`
@@ -63,18 +66,18 @@ const Body = styled.div`
 `;
 
 const AuthorName = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.md};
-  color: ${({ isAuthor }) => (isAuthor ? colors.primary : colors.textMain)};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h10};
+  color: ${({ isAuthor }) => (isAuthor ? PALETTE.primary.main : TEXT_COLOR.basic)};
   margin: 0;
 `;
 
 const CommentText = styled.div`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.md};
-  color: ${colors.textMain};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.regular};
+  font-size: ${FONT_SIZE.h10};
+  color: ${TEXT_COLOR.basic};
   letter-spacing: -0.28px;
   line-height: 22px;
 
@@ -96,15 +99,15 @@ const ReactionItem = styled.div`
   cursor: pointer;
 
   svg {
-    font-size: ${fonts.size.sm};
-    color: ${({ active }) => (active ? colors.primary : colors.textSub)};
+    font-size: ${FONT_SIZE.h11};
+    color: ${({ active }) => (active ? PALETTE.primary.main : GRAYSCALE[9])};
   }
 
   span {
-    font-family: ${fonts.family};
-    font-weight: ${fonts.weight.regular};
-    font-size: ${fonts.size.sm};
-    color: ${colors.textMain};
+    font-family: ${FONT_FAMILY};
+    font-weight: ${FONT_WEIGHT.regular};
+    font-size: ${FONT_SIZE.h11};
+    color: ${TEXT_COLOR.basic};
     white-space: nowrap;
   }
 `;
@@ -118,20 +121,20 @@ const AccessibilityRow = styled.div`
 
 const AccessBtn = styled.button`
   padding: 6px 16px;
-  border-radius: ${radius.sm};
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.sm};
+  border-radius: ${RADIUS.sm};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h11};
   letter-spacing: -0.24px;
   cursor: pointer;
   white-space: nowrap;
   background: ${({ variant }) =>
-    variant === "blue" ? colors.primaryLight : colors.accessibilityReadBg};
+    variant === "blue" ? PALETTE.primary.extraLight : ACCESSIBILITY.readBg};
   color: ${({ variant }) =>
-    variant === "blue" ? colors.primary : colors.accessibilityRead};
+    variant === "blue" ? PALETTE.primary.main : ACCESSIBILITY.readColor};
   border: 1px solid
     ${({ variant }) =>
-      variant === "blue" ? colors.primary : colors.accessibilityRead};
+      variant === "blue" ? PALETTE.primary.main : ACCESSIBILITY.readColor};
 `;
 
 const RightArea = styled.div`
@@ -145,10 +148,10 @@ const RightArea = styled.div`
 `;
 
 const TimeText = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.sm};
-  color: ${colors.textSub};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.regular};
+  font-size: ${FONT_SIZE.h11};
+  color: ${GRAYSCALE[9]};
   letter-spacing: -0.24px;
   margin: 0;
   text-align: right;
@@ -157,9 +160,9 @@ const TimeText = styled.p`
 const ReportButton = styled.button`
   width: 40px;
   height: 40px;
-  border-radius: ${radius.button};
-  background: ${colors.bgCard};
-  border: 2px solid ${colors.danger};
+  border-radius: ${RADIUS.button};
+  background: ${SURFACE.card};
+  border: 2px solid ${PALETTE.red};
   display: flex;
   align-items: center;
   justify-content: center;

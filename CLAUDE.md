@@ -10,14 +10,14 @@
 
 ## 기술 스택
 
-| 항목 | 버전 |
-|------|------|
-| React | 19.x |
-| react-router-dom | 7.x |
-| styled-components | 6.x |
-| zustand | 5.x |
-| react-hook-form | 7.x |
-| @fortawesome/react-fontawesome | 3.x |
+| 항목                           | 버전 |
+| ------------------------------ | ---- |
+| React                          | 19.x |
+| react-router-dom               | 7.x  |
+| styled-components              | 6.x  |
+| zustand                        | 5.x  |
+| react-hook-form                | 7.x  |
+| @fortawesome/react-fontawesome | 3.x  |
 
 ---
 
@@ -54,13 +54,13 @@ src/
 
 ## 라우트
 
-| 경로 | 컴포넌트 |
-|------|---------|
-| `/` | PostListCard |
-| `/chat-card` | LiveChatCard |
-| `/chat-page` | ChatSample |
+| 경로                  | 컴포넌트       |
+| --------------------- | -------------- |
+| `/`                   | PostListCard   |
+| `/chat-card`          | LiveChatCard   |
+| `/chat-page`          | ChatSample     |
 | `/community/post/:id` | PostDetailPage |
-| `/community/user/:id` | UserProfile |
+| `/community/user/:id` | UserProfile    |
 
 ---
 
@@ -77,8 +77,8 @@ src/
 
 ### 대표 분할 패턴
 
-| 패턴 | 왼쪽 | 오른쪽 | 용도 |
-|------|------|--------|------|
+| 패턴  | 왼쪽                            | 오른쪽                          | 용도            |
+| ----- | ------------------------------- | ------------------------------- | --------------- |
 | 9 + 3 | `984px` (`layout.cardMaxWidth`) | `312px` (`layout.sidebarWidth`) | 본문 + 사이드바 |
 
 > 984 + 24(gap) + 312 = **1320px** ✓
@@ -112,8 +112,8 @@ const ContentWrapper = styled.main`
 > **컴포넌트 내부에 색상·폰트 값을 직접 하드코딩하지 않는다.**  
 > 모든 디자인 토큰은 중앙 파일에 정의하고, 컴포넌트는 해당 변수를 참조한다.
 
-이 프로젝트에서는 `src/styles/theme.js` 파일에 토큰을 정의한다.  
-팀장 프로젝트로 이전 시, 해당 프로젝트의 테마/변수 파일로 교체하면 되도록 구조화한다.
+이 프로젝트에서는 `src/styles/` 디렉토리 내에 있는 파일에 있는 스타일을 사용한다.
+해당 디렉토리에 있는 스타일들은 건드리면 안된다. 팀장이 전달해준거고, 수정하면 git 충돌이 발생한다.
 
 ---
 
@@ -126,36 +126,36 @@ const ContentWrapper = styled.main`
 
 export const colors = {
   // 키 컬러 (브랜드)
-  primary: '#4359fc',
-  primaryDark: '#0014a9',
-  primaryLight: '#eef1ff',
-  primaryMid: '#7b8fff',
-  primaryFooter: '#4157ff',
+  primary: "#4359fc",
+  primaryDark: "#0014a9",
+  primaryLight: "#eef1ff",
+  primaryMid: "#7b8fff",
+  primaryFooter: "#4157ff",
 
   // 그래디언트
-  gradientMain: 'linear-gradient(162.3deg, #0014a9 0%, #4359fc 100%)',
-  gradientCard: 'linear-gradient(160.58deg, #4359fc 0%, #7b8fff 100%)',
-  gradientAccessibility: 'linear-gradient(90deg, #eef1ff 34%, #e8f9e9 100%)',
+  gradientMain: "linear-gradient(162.3deg, #0014a9 0%, #4359fc 100%)",
+  gradientCard: "linear-gradient(160.58deg, #4359fc 0%, #7b8fff 100%)",
+  gradientAccessibility: "linear-gradient(90deg, #eef1ff 34%, #e8f9e9 100%)",
 
   // 텍스트
-  textMain: '#333333',
-  textSub: '#9ca3af',
-  textWhite: '#ffffff',
+  textMain: "#333333",
+  textSub: "#9ca3af",
+  textWhite: "#ffffff",
 
   // 배경
-  bgPage: '#f0f2f5',
-  bgCard: '#ffffff',
-  bgSection: '#f9fafb',
+  bgPage: "#f0f2f5",
+  bgCard: "#ffffff",
+  bgSection: "#f9fafb",
 
   // 보더
-  border: '#e5e7eb',
+  border: "#e5e7eb",
 
   // 상태 색상
-  live: '#129d1b',
-  liveBg: '#e8f9e9',
-  danger: '#f14141',
-  accessibilitySign: '#4359fc',      // 수어로 보기
-  accessibilityRead: '#4dc953',      // 글 읽어주기
+  live: "#129d1b",
+  liveBg: "#e8f9e9",
+  danger: "#f14141",
+  accessibilitySign: "#4359fc", // 수어로 보기
+  accessibilityRead: "#4dc953", // 글 읽어주기
 };
 
 export const fonts = {
@@ -166,38 +166,38 @@ export const fonts = {
     bold: 700,
   },
   size: {
-    xs: '10px',
-    sm: '12px',
-    smMd: '13px',
-    md: '14px',
-    mdLg: '15px',
-    base: '16px',
-    lg: '18px',
-    xl: '20px',
-    xxl: '24px',
-    xxxl: '28px',
+    xs: "10px",
+    sm: "12px",
+    smMd: "13px",
+    md: "14px",
+    mdLg: "15px",
+    base: "16px",
+    lg: "18px",
+    xl: "20px",
+    xxl: "24px",
+    xxxl: "28px",
   },
 };
 
 export const radius = {
-  pill: '100px',   // 배지, 태그
-  card: '20px',    // 카드
-  button: '12px',  // 버튼, 아바타
-  input: '8px',    // 입력 필드
-  sm: '10px',      // 소형 버튼
+  pill: "100px", // 배지, 태그
+  card: "20px", // 카드
+  button: "12px", // 버튼, 아바타
+  input: "8px", // 입력 필드
+  sm: "10px", // 소형 버튼
 };
 
 export const shadows = {
-  card: '0 8px 24px rgba(67, 89, 252, 0.12)',
-  cardHover: '0 8px 24px rgba(67, 89, 252, 0.18)',
-  float: '0 8px 24px rgba(67, 89, 252, 0.35)',
+  card: "0 8px 24px rgba(67, 89, 252, 0.12)",
+  cardHover: "0 8px 24px rgba(67, 89, 252, 0.18)",
+  float: "0 8px 24px rgba(67, 89, 252, 0.35)",
 };
 
 export const layout = {
-  headerHeight: '79px',
-  breadcrumbHeight: '40px',
-  sidebarWidth: '312px',
-  cardMaxWidth: '984px',
+  headerHeight: "79px",
+  breadcrumbHeight: "40px",
+  sidebarWidth: "312px",
+  cardMaxWidth: "984px",
 };
 
 const theme = { colors, fonts, radius, shadows, layout };
@@ -212,7 +212,7 @@ styled-components에서 직접 import해서 사용한다.
 
 ```jsx
 // 올바른 방법 (변수 참조)
-import { colors, fonts, radius } from '../../styles/theme';
+import { colors, fonts, radius } from "../../styles/theme";
 
 const Button = styled.button`
   background: ${colors.primary};
@@ -223,8 +223,8 @@ const Button = styled.button`
 
 // 금지 (하드코딩)
 const Button = styled.button`
-  background: #4359fc;       /* 하드코딩 금지 */
-  font-family: 'Pretendard'; /* 하드코딩 금지 */
+  background: #4359fc; /* 하드코딩 금지 */
+  font-family: "Pretendard"; /* 하드코딩 금지 */
 `;
 ```
 
@@ -232,15 +232,15 @@ const Button = styled.button`
 
 ## 컴포넌트별 주요 토큰 사용 현황
 
-| 컴포넌트 | 주요 사용 토큰 |
-|---------|-------------|
-| PostListCard | `colors.primary`, `colors.bgCard`, `colors.border`, `shadows.cardHover`, `radius.card` |
-| LiveChatCard | `colors.gradientCard`, `colors.live`, `colors.liveBg`, `radius.card` |
-| FloatingChatButton | `colors.gradientMain`, `shadows.float`, `radius.button` |
-| PostContent | `colors.primary`, `colors.primaryLight`, `colors.gradientAccessibility` |
-| CommentSection / CommentItem | `colors.primary`, `colors.textMain`, `colors.textSub`, `colors.border` |
-| PostSidebar / NoticeItem | `colors.primaryDark`, `colors.primaryLight`, `colors.border` |
-| PostDetailPage (Footer) | `colors.primaryFooter`, `colors.textWhite` |
+| 컴포넌트                     | 주요 사용 토큰                                                                         |
+| ---------------------------- | -------------------------------------------------------------------------------------- |
+| PostListCard                 | `colors.primary`, `colors.bgCard`, `colors.border`, `shadows.cardHover`, `radius.card` |
+| LiveChatCard                 | `colors.gradientCard`, `colors.live`, `colors.liveBg`, `radius.card`                   |
+| FloatingChatButton           | `colors.gradientMain`, `shadows.float`, `radius.button`                                |
+| PostContent                  | `colors.primary`, `colors.primaryLight`, `colors.gradientAccessibility`                |
+| CommentSection / CommentItem | `colors.primary`, `colors.textMain`, `colors.textSub`, `colors.border`                 |
+| PostSidebar / NoticeItem     | `colors.primaryDark`, `colors.primaryLight`, `colors.border`                           |
+| PostDetailPage (Footer)      | `colors.primaryFooter`, `colors.textWhite`                                             |
 
 ---
 
@@ -249,7 +249,7 @@ const Button = styled.button`
 ```css
 /* 폰트 패밀리는 index.css 에서 body에 한 번만 선언 */
 body {
-  font-family: 'Pretendard', sans-serif;
+  font-family: "Pretendard", sans-serif;
   background-color: #f0f2f5; /* → 팀장 프로젝트 이전 시 bgPage 토큰으로 대체 */
   margin: 0;
 }

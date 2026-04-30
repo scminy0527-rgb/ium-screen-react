@@ -2,7 +2,14 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import { colors, fonts, radius } from "../../styles/themeOriginal";
+import theme from "../../styles/theme";
+import {
+  FONT_FAMILY,
+  SURFACE, TAG_ON_PRIMARY, ACCESSIBILITY,
+  PALETTE_EXT, RADIUS,
+} from "../../constants";
+
+const { PALETTE, GRAYSCALE, TEXT_COLOR, FONT_SIZE, FONT_WEIGHT } = theme;
 
 const authorProfileImg =
   "https://www.figma.com/api/mcp/asset/c2cb9995-4cdf-4fcb-97c9-8a6c124289ab";
@@ -16,30 +23,30 @@ const PostHeader = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
-  background: ${colors.primary};
+  background: ${PALETTE.primary.main};
   padding: 15px 52px;
-  border-radius: ${radius.card} ${radius.card} 0 0;
+  border-radius: ${RADIUS.card} ${RADIUS.card} 0 0;
 `;
 
 const CategoryTag = styled.span`
-  background: ${colors.tagOnPrimary};
-  border: 1px solid ${colors.tagOnPrimaryBorder};
-  color: ${colors.textWhite};
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.sm};
+  background: ${TAG_ON_PRIMARY.bg};
+  border: 1px solid ${TAG_ON_PRIMARY.border};
+  color: ${PALETTE.white};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h11};
   letter-spacing: -0.24px;
   line-height: 20px;
   padding: 4px 16px;
-  border-radius: ${radius.pill};
+  border-radius: ${RADIUS.pill};
   white-space: nowrap;
 `;
 
 const BreadcrumbPath = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.sm};
-  color: ${colors.textWhiteSubtle};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.regular};
+  font-size: ${FONT_SIZE.h11};
+  color: ${TAG_ON_PRIMARY.text};
   letter-spacing: -0.24px;
   margin: 0;
   white-space: nowrap;
@@ -47,8 +54,8 @@ const BreadcrumbPath = styled.p`
 
 /* ── Body wrapper ── */
 const BodyWrapper = styled.div`
-  background: ${colors.bgCard};
-  border-radius: 0 0 ${radius.card} ${radius.card};
+  background: ${SURFACE.card};
+  border-radius: 0 0 ${RADIUS.card} ${RADIUS.card};
   padding: 44px 52px;
   display: flex;
   flex-direction: column;
@@ -57,10 +64,10 @@ const BodyWrapper = styled.div`
 
 /* ── Title ── */
 const PostTitle = styled.h1`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.xxl};
-  color: ${colors.textMain};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h7};
+  color: ${TEXT_COLOR.basic};
   margin: 0;
   word-break: keep-all;
 `;
@@ -76,7 +83,7 @@ const AuthorRow = styled.div`
 const AuthorAvatar = styled.img`
   width: 44px;
   height: 44px;
-  border-radius: ${radius.sm};
+  border-radius: ${RADIUS.sm};
   object-fit: cover;
   flex-shrink: 0;
 `;
@@ -88,10 +95,10 @@ const AuthorMeta = styled.div`
 `;
 
 const AuthorName = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.base};
-  color: ${colors.textMain};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h9};
+  color: ${TEXT_COLOR.basic};
   margin: 0;
   white-space: nowrap;
 `;
@@ -103,21 +110,21 @@ const AuthorSubRow = styled.div`
 `;
 
 const LevelBadge = styled.span`
-  background: ${colors.primaryLight};
-  color: ${colors.primary};
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.xs};
+  background: ${PALETTE.primary.extraLight};
+  color: ${PALETTE.primary.main};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h12};
   padding: 2px 6px;
-  border-radius: ${radius.pill};
+  border-radius: ${RADIUS.pill};
   white-space: nowrap;
 `;
 
 const MetaText = styled.span`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.sm};
-  color: ${colors.textSub};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.regular};
+  font-size: ${FONT_SIZE.h11};
+  color: ${GRAYSCALE[9]};
   letter-spacing: -0.24px;
   white-space: nowrap;
 `;
@@ -125,7 +132,7 @@ const MetaText = styled.span`
 const Divider = styled.div`
   width: 100%;
   height: 1px;
-  background: ${colors.border};
+  background: ${GRAYSCALE[8]};
 `;
 
 /* ── Post body text ── */
@@ -137,31 +144,31 @@ const BodyText = styled.div`
 `;
 
 const Paragraph = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.md};
-  color: ${colors.textMain};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.regular};
+  font-size: ${FONT_SIZE.h10};
+  color: ${TEXT_COLOR.basic};
   letter-spacing: -0.28px;
   line-height: 22px;
   margin: 0;
 `;
 
 const HighlightWord = styled.span`
-  background: ${colors.primaryLight};
-  color: ${colors.primary};
+  background: ${PALETTE.primary.extraLight};
+  color: ${PALETTE.primary.main};
   border-radius: 4px;
   padding: 0 2px;
 `;
 
 const BlockQuote = styled.div`
-  border-left: 6px solid ${colors.primaryMid};
-  background: ${colors.primaryLight};
+  border-left: 6px solid ${PALETTE_EXT.primaryMid};
+  background: ${PALETTE.primary.extraLight};
   border-radius: 4px 8px 8px 4px;
   padding: 9px 13px;
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.md};
-  color: ${colors.textMain};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.regular};
+  font-size: ${FONT_SIZE.h10};
+  color: ${TEXT_COLOR.basic};
   letter-spacing: -0.28px;
   line-height: 22px;
 `;
@@ -177,8 +184,8 @@ const ImageArea = styled.div`
 const ImageBox = styled.div`
   width: 100%;
   max-width: 547px;
-  background: ${colors.primaryLight};
-  border: 2px dashed ${colors.primaryMid};
+  background: ${PALETTE.primary.extraLight};
+  border: 2px dashed ${PALETTE_EXT.primaryMid};
   border-radius: 16px;
   padding: 36px;
   display: flex;
@@ -194,10 +201,10 @@ const EmojiItem = styled.span`
 `;
 
 const ImageCaption = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.sm};
-  color: ${colors.textSub};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.regular};
+  font-size: ${FONT_SIZE.h11};
+  color: ${GRAYSCALE[9]};
   letter-spacing: -0.24px;
   line-height: 20px;
   text-align: center;
@@ -214,16 +221,16 @@ const TagRow = styled.div`
 `;
 
 const Tag = styled.span`
-  background: ${colors.bgCard};
-  border: 1px solid ${colors.border};
-  color: ${colors.textMain};
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.base};
+  background: ${SURFACE.card};
+  border: 1px solid ${GRAYSCALE[8]};
+  color: ${TEXT_COLOR.basic};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h9};
   letter-spacing: -0.32px;
   line-height: 24px;
   padding: 16px 30px;
-  border-radius: ${radius.pill};
+  border-radius: ${RADIUS.pill};
   white-space: nowrap;
   cursor: pointer;
 `;
@@ -231,9 +238,9 @@ const Tag = styled.span`
 /* ── Accessibility Tools ── */
 const AccessibilityBox = styled.div`
   width: 100%;
-  border: 1px solid ${colors.live};
+  border: 1px solid ${PALETTE.secondary.main};
   border-radius: 16px;
-  background: ${colors.gradientAccessibility};
+  background: ${ACCESSIBILITY.gradient};
   height: 119px;
   position: relative;
   overflow: hidden;
@@ -242,10 +249,10 @@ const AccessibilityBox = styled.div`
 `;
 
 const AccessibilityLabel = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.xl};
-  color: ${colors.primary};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h8};
+  color: ${PALETTE.primary.main};
   letter-spacing: -0.4px;
   margin: 0;
   position: absolute;
@@ -258,20 +265,20 @@ const AccessBtn = styled.button`
   top: 36px;
   left: ${({ pos }) => pos};
   padding: 14px 80px;
-  border-radius: ${radius.input};
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.base};
+  border-radius: ${RADIUS.input};
+  font-family: ${FONT_FAMILY};
+  font-weight: ${FONT_WEIGHT.bold};
+  font-size: ${FONT_SIZE.h9};
   letter-spacing: -0.32px;
   line-height: 24px;
   cursor: pointer;
   white-space: nowrap;
   background: ${({ variant }) =>
-    variant === "blue" ? colors.primary : colors.accessibilityReadBg};
+    variant === "blue" ? PALETTE.primary.main : ACCESSIBILITY.readBg};
   color: ${({ variant }) =>
-    variant === "blue" ? colors.textWhite : colors.live};
+    variant === "blue" ? PALETTE.white : PALETTE.secondary.main};
   border: ${({ variant }) =>
-    variant === "blue" ? "none" : `1px solid ${colors.accessibilityRead}`};
+    variant === "blue" ? "none" : `1px solid ${ACCESSIBILITY.readColor}`};
   transition: opacity 0.2s;
 
   &:hover {
@@ -297,16 +304,16 @@ const LikeButton = styled.button`
   padding: 0;
 
   svg {
-    font-size: ${fonts.size.base};
-    color: ${({ liked }) => (liked ? colors.danger : colors.textMain)};
+    font-size: ${FONT_SIZE.h9};
+    color: ${({ liked }) => (liked ? PALETTE.red : TEXT_COLOR.basic)};
     transition: color 0.2s;
   }
 
   span {
-    font-family: ${fonts.family};
-    font-weight: ${fonts.weight.bold};
-    font-size: ${fonts.size.xl};
-    color: ${colors.textMain};
+    font-family: ${FONT_FAMILY};
+    font-weight: ${FONT_WEIGHT.bold};
+    font-size: ${FONT_SIZE.h8};
+    color: ${TEXT_COLOR.basic};
     letter-spacing: -0.4px;
   }
 `;
@@ -320,9 +327,9 @@ const ActionButtons = styled.div`
 const IconButton = styled.button`
   width: 40px;
   height: 40px;
-  border-radius: ${radius.button};
-  background: ${colors.bgCard};
-  border: 2px solid ${({ danger }) => (danger ? colors.danger : colors.border)};
+  border-radius: ${RADIUS.button};
+  background: ${SURFACE.card};
+  border: 2px solid ${({ danger }) => (danger ? PALETTE.red : GRAYSCALE[8])};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -332,7 +339,8 @@ const IconButton = styled.button`
   transition: border-color 0.2s;
 
   &:hover {
-    border-color: ${({ danger }) => (danger ? "#c41010" : colors.textSub)};
+    border-color: ${({ danger }) =>
+      danger ? PALETTE_EXT.redHover : GRAYSCALE[9]};
   }
 
   img {
@@ -342,8 +350,8 @@ const IconButton = styled.button`
   }
 
   svg {
-    font-size: ${fonts.size.base};
-    color: ${({ danger }) => (danger ? colors.danger : colors.textMain)};
+    font-size: ${FONT_SIZE.h9};
+    color: ${({ danger }) => (danger ? PALETTE.red : TEXT_COLOR.basic)};
   }
 `;
 
