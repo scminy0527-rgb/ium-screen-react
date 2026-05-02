@@ -131,6 +131,64 @@ Card (312px, border-radius: 20px)
 
 ---
 
+### PostFilterBar.jsx — 게시글 검색 및 필터 바
+
+유저 프로필 메인 영역(9컬럼) 상단에 배치되는 검색·타입 탭·정렬 컨트롤 컴포넌트다.
+
+**Props**
+
+| prop           | type                                              | 기본값                                        | 설명                                              |
+| -------------- | ------------------------------------------------- | --------------------------------------------- | ------------------------------------------------- |
+| `counts`       | `{ post: number, comment: number, like: number }` | `{ post: 42, comment: 42, like: 42 }`         | 타입 탭 뱃지에 표시할 수량                        |
+| `onTypeChange` | `(key: string) => void`                           | `undefined`                                   | 타입 탭 변경 시 콜백 (`post` / `comment` / `like`) |
+| `onSortChange` | `(key: string) => void`                           | `undefined`                                   | 정렬 버튼 변경 시 콜백 (`latest` / `popular`)     |
+| `onSearch`     | `(value: string) => void`                         | `undefined`                                   | 검색 입력값 변경 시 콜백                          |
+
+**사용 예**
+
+```jsx
+import PostFilterBar from "./PostFilterBar";
+
+// 기본 목업 데이터 사용
+<PostFilterBar />
+
+// 실제 데이터 주입
+<PostFilterBar
+  counts={{ post: user.postCount, comment: user.commentCount, like: user.likeCount }}
+  onTypeChange={(type) => setActiveType(type)}
+  onSortChange={(sort) => setActiveSort(sort)}
+  onSearch={(value) => setSearchQuery(value)}
+/>
+```
+
+**레이아웃 구조**
+
+```
+PostFilterBar (column, gap: 24px)
+├── SearchRow (justify-center)
+│   └── SearchBox (536px, border-radius: 12px)
+│       ├── SearchInput  placeholder "게시글 검색"
+│       └── SearchIcon   (16×16)
+└── FilterRow (flex, gap: 10px)
+    ├── TypeTab "작성 게시글" [active]  — TabIconLabel + CountBadge
+    ├── TypeTab "작성 댓글"             — TabIconLabel + CountBadge
+    ├── TypeTab "좋아요한 글"           — TabIconLabel + CountBadge
+    ├── Spacer (flex: 1)
+    └── SortGroup (gap: 8px)
+        ├── SortButton "최신순"  [active]
+        └── SortButton "인기순"
+```
+
+**스타일 참고**
+
+- `TypeTab` 활성: `theme.PALETTE.primary.main` 배경 + 흰색 텍스트
+- `TypeTab` 비활성: `theme.GRAYSCALE[10]` 배경 + `theme.GRAYSCALE[8]` 보더
+- `CountBadge` 활성 시 텍스트 색상: `theme.PALETTE.primary.main`
+- `SortButton` 활성: `theme.PALETTE.primary.extraLight` 배경 + `theme.PALETTE.primary.main` 보더
+- 아이콘은 Figma asset URL (7일 만료) — 팀장 프로젝트 이전 시 `src/assets/` 영구 에셋으로 교체
+
+---
+
 ## 공통 사항
 
 - 세 컴포넌트 모두 `width: 312px` 고정 — `layout.sidebarWidth`에 대응한다.

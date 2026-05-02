@@ -13,6 +13,7 @@ URL 변경 없이 동작하는 플로팅 UI로, 부모 컴포넌트의 상태(st
 | `SideChatComponent.jsx` | 1:1 미니 채팅 패널 |
 | `SideChatListComponent.jsx` | 채팅방 목록 패널 |
 | `SideChatRequestComponent.jsx` | 1:1 채팅 요청 유저 리스트 패널 |
+| `CreateChatRoomModal.jsx` | 채팅방 만들기 팝업 폼 |
 
 > 테스트 페이지: `src/page/SideChatSample.jsx` (라우트: `/side-chat`)
 
@@ -229,6 +230,103 @@ import { faMinus, faExpand, faXmark, faHandshake } from "@fortawesome/free-solid
 │ [모든 채팅방] [채팅중인 방] [요청] │  ← TabGroup (하단 고정)
 └─────────────────────────┘
 ```
+
+---
+
+## CreateChatRoomModal.jsx
+
+### 역할
+
+채팅방을 새로 생성하는 팝업 폼 컴포넌트. URL 변경 없이 모달 형태로 표시되며,  
+방 이름·소개·태그·최대 인원·대표 썸네일을 입력받아 `onSubmit` 콜백으로 전달한다.
+
+### Props
+
+| prop | 타입 | 설명 |
+|---|---|---|
+| `onClose` | `() => void` | 닫기(X) 버튼 클릭 |
+| `onSubmit` | `(data: FormData) => void` | 채팅방 만들기 버튼 클릭 시 호출 |
+
+#### FormData 타입
+
+```ts
+{
+  roomName: string;
+  roomDesc: string;
+  tags: string[];
+  maxUsers: number | null;  // null이면 제한 없음(최대 999명)
+  thumbnailFile: File | null;
+}
+```
+
+### 내부 상태
+
+| 상태 | 초기값 | 설명 |
+|---|---|---|
+| `roomName` | `""` | 방 이름 입력값 |
+| `roomDesc` | `""` | 방 소개 입력값 |
+| `tags` | `[]` | 태그 배열 (최대 5개, Enter로 추가) |
+| `tagInput` | `""` | 현재 태그 입력창 값 |
+| `maxUsers` | `""` | 최대 참여 인원 직접 입력값 |
+| `isUnlimited` | `true` | 제한 없음 토글 — ON이면 `maxUsers` 입력 비활성화 |
+| `thumbnailFile` | `null` | 업로드된 이미지 File 객체 |
+| `thumbnailPreview` | `null` | 미리보기용 Object URL (파일 선택 시 생성) |
+
+### 레이아웃 구조
+
+```
+┌──────────────────────────────────────────────┐
+│ [● 새로운 채팅방 만들기 / 수어 학습...]  [X] │  ← TopBar
+│   (primary 배경, radius.pill)                 │
+├──────────────────────────────────────────────┤
+│ 기본 정보                                     │  ← SectionLabel (primary, 10px)
+│  방 이름 *  [____________________________]   │
+│  방 소개 *  [____________________________]   │
+│             [____________________________]   │
+│  태그       [#태그1  #태그2  |  입력... ]   │  ← TagInputWrap (Enter로 추가, 최대 5개)
+│ ─────────────────────────────────────────    │  ← Divider
+│ 채팅방 설정                                   │  ← SectionLabel
+│  최대 참여 인원 *                             │
+│  [172px 인원수 입력]  ◉ 제한 없음(최대 999명) │  ← toggle ON이면 입력 disabled
+│  대표 썸네일 (선택)                           │
+│  ┌ - - - - - - - - - - - - - - - - - ┐     │
+│  | ↑  파일을 드래그하거나 클릭해서... |     │  ← UploadArea (클릭 시 파일 선택)
+│  | JPG, PNG · 파일당 최대 10MB       |     │     파일 선택 후 ThumbnailPreview 표시
+│  | [이미지 첨부]                      |     │
+│  └ - - - - - - - - - - - - - - - - - ┘     │
+│                                              │
+│           [● 채팅방 만들기]                  │  ← SubmitBtn (288px, 중앙 정렬)
+└──────────────────────────────────────────────┘
+  width: 800px
+```
+
+### 아이콘 의존성
+
+```js
+import { faArrowUpFromBracket, faComments, faXmark } from "@fortawesome/free-solid-svg-icons";
+// faArrowUpFromBracket: 업로드 영역 아이콘 (Font Awesome 6)
+// faComments: 타이틀 및 제출 버튼 아이콘
+// faXmark: 닫기 버튼 및 태그 삭제 버튼
+```
+
+### 사용 예시
+
+```jsx
+const [showModal, setShowModal] = useState(false);
+
+{showModal && (
+  <CreateChatRoomModal
+    onClose={() => setShowModal(false)}
+    onSubmit={(data) => {
+      console.log(data);
+      setShowModal(false);
+    }}
+  />
+)}
+```
+
+> 주의: 이 컴포넌트는 자체적으로 팝업 위치(fixed, z-index 등)를 지정하지 않는다.  
+> 부모가 `position: fixed` 래퍼로 화면 위치를 잡아야 한다.
 
 ---
 
