@@ -7,6 +7,7 @@ import UserProfile from "../page/UserProfile";
 import PostWrite from "../page/PostWrite";
 import PopupChatScreen from "../component/PopupChatScreen";
 import SideChatSample from "../page/SideChatSample";
+import PopupChatRoomSelect from "../component/chatComponent/PopupChatRoomSelect";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: "/popup-chat",
     element: <PopupChatScreen />,
+  },
+  {
+    path: "/popup-chat-select",
+    element: <PopupChatRoomSelect />,
   },
   {
     path: "/side-chat",

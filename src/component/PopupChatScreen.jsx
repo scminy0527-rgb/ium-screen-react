@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { colors, fonts, radius } from "../styles/themeOriginal";
+import OutlineButton from "./common/OutlineButton";
+import ToggleSwitch from "./common/ToggleSwitch";
 
 // Figma asset URLs (expires in 7 days)
 const assets = {
@@ -151,9 +153,13 @@ const TAGS = [
   { label: "#일상수어", bg: colors.liveBg, color: colors.live },
   { label: "#일상회화", bg: colors.liveBg, color: colors.live },
   { label: "#일상수어", bg: colors.liveBg, color: colors.live },
-  { label: "#질문환영", bg: colors.tagOrangeLightBg, color: colors.orange },
-  { label: "#초보환영", bg: colors.purpleBg, color: colors.purple },
+  { label: "#질문환영", bg: "#fff3e8", color: "#ff8004" },
+  { label: "#초보환영", bg: "#e1beec", color: "#b63fde" },
 ];
+
+const ORANGE = "#ff8004";
+const ORANGE_LIGHT = "#fff3e8";
+const ORANGE_DARK = "#92400e";
 
 // ─── Page wrapper ──────────────────────────────────────────────────────────────
 
@@ -350,6 +356,7 @@ const CloseBtn = styled.button`
 const Body = styled.div`
   display: flex;
   align-items: stretch;
+  height: 540px;
 `;
 
 // ─── Left panel ────────────────────────────────────────────────────────────────
@@ -494,10 +501,12 @@ const CenterPanel = styled.div`
   display: flex;
   flex-direction: column;
   align-self: stretch;
+  min-height: 0;
 `;
 
 const MessagesArea = styled.div`
   flex: 1;
+  min-height: 0;
   background: ${colors.bgCard};
   border-bottom: 1px solid ${colors.border};
   display: flex;
@@ -672,23 +681,40 @@ const RightPanel = styled.div`
   border-radius: 0 0 ${radius.card} 0;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+`;
+
+/* 채팅방 기본 정보 패널 — 내용이 패널 높이를 초과하면 세로 스크롤 */
+const RightPanelScroll = styled.div`
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: ${colors.border};
+    border-radius: 3px;
+  }
 `;
 
 const PanelSection = styled.div`
   background: ${colors.bgCard};
   border-left: 1px solid ${colors.border};
-  border-bottom: 1px solid ${colors.border};
+  border-bottom: ${({ $last }) =>
+    $last ? "none" : `1px solid ${colors.border}`};
   padding: 16px;
   display: flex;
   flex-direction: column;
   gap: ${({ $gap }) => $gap || "8px"};
   align-items: ${({ $center }) => ($center ? "center" : "flex-start")};
   flex: ${({ $flex }) => $flex || "none"};
-`;
-
-const LastSection = styled(PanelSection)`
-  border-bottom: none;
-  border-radius: 0 0 ${radius.card} 0;
 `;
 
 const SectionLabel = styled.p`
@@ -798,91 +824,68 @@ const Tag = styled.div`
   white-space: nowrap;
 `;
 
-const StatsRow = styled.div`
-  display: flex;
-  gap: 8px;
-  width: 100%;
-`;
 
-const StatItem = styled.div`
-  flex: 1;
-  background: ${colors.bgSection};
-  border-radius: ${radius.button};
-  padding: 6px;
+/* 접근성 도구 섹션 — 라벨 + 토글 가로 배치 */
+const AccessRow = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
-`;
-
-const StatValue = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.base};
-  line-height: 24px;
-  letter-spacing: -0.32px;
-  color: ${colors.primary};
-  margin: 0;
-  text-align: center;
-`;
-
-const StatLabel = styled.p`
-  font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
-  font-size: ${fonts.size.sm};
-  line-height: 20px;
-  letter-spacing: -0.24px;
-  color: ${colors.textSub};
-  margin: 0;
-  text-align: center;
-`;
-
-const PanelBtn = styled.button`
-  background: ${colors.bgCard};
-  border: 2px solid ${colors.border};
-  border-radius: ${radius.sm};
+  justify-content: space-between;
   width: 100%;
-  padding: 8px 16px;
-  cursor: pointer;
+`;
+
+const AccessLabel = styled.p`
   font-family: ${fonts.family};
-  font-weight: ${fonts.weight.bold};
+  font-weight: ${fonts.weight.regular};
   font-size: ${fonts.size.sm};
-  line-height: 20px;
-  color: ${colors.textSub};
-  transition:
-    border-color 0.15s,
-    color 0.15s;
-  &:hover {
-    border-color: ${colors.primary};
-    color: ${colors.primary};
-  }
+  color: ${colors.textMain};
+  margin: 0;
 `;
 
 // ─── ChatRoomUserInfo ───────────────────────────────────────────────────────────
 
-const UserInfoAvatarBox = styled.div`
-  background: ${colors.bgSection};
-  border: 1px solid ${colors.border};
-  border-radius: 16px;
-  padding: 10px;
+const UserInfoTopSection = styled.div`
+  background: ${colors.bgCard};
+  border-left: 1px solid ${colors.border};
+  border-bottom: 1px solid ${colors.border};
+  padding: 19px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+`;
+
+const UserInfoSectionHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+`;
+
+const UserInfoSectionTitle = styled.p`
+  font-family: ${fonts.family};
+  font-weight: ${fonts.weight.bold};
+  font-size: ${fonts.size.base};
+  color: ${colors.textMain};
+  margin: 0;
+`;
+
+const UserBigAvatarBox = styled.div`
+  width: 64px;
+  height: 64px;
+  background: ${colors.primaryLight};
+  border-radius: ${radius.button};
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   img {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
+    width: 100%;
+    height: 100%;
     object-fit: ${({ $isIcon }) => ($isIcon ? "contain" : "cover")};
-    background: ${colors.bgSection};
-    padding: ${({ $isIcon }) => ($isIcon ? "4px" : "0")};
+    padding: ${({ $isIcon }) => ($isIcon ? "12px" : "0")};
+    box-sizing: border-box;
   }
-`;
-
-const UserInfoMeta = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  width: 100%;
 `;
 
 const UserInfoName = styled.p`
@@ -896,17 +899,52 @@ const UserInfoName = styled.p`
   margin: 0;
 `;
 
-const UserInfoBadgeRow = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 6px;
+const LevelRoleBadge = styled.div`
+  background: ${colors.primaryLight};
+  border-radius: ${radius.pill};
+  padding: 4px 12px;
+  font-family: ${fonts.family};
+  font-weight: ${fonts.weight.bold};
+  font-size: ${fonts.size.sm};
+  color: ${colors.primary};
+  white-space: nowrap;
 `;
 
-const UserInfoRole = styled.p`
+const ActionDescText = styled.p`
   font-family: ${fonts.family};
   font-weight: ${fonts.weight.regular};
-  font-size: ${fonts.size.xs};
-  color: ${colors.textSub};
+  font-size: ${fonts.size.sm};
+  line-height: 20px;
+  letter-spacing: -0.24px;
+  color: ${colors.textMain};
+  margin: 0;
+`;
+
+const ReportCard = styled.div`
+  background: ${ORANGE_LIGHT};
+  border-radius: 16px;
+  padding: 12px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+`;
+
+const ReportCardTitle = styled.p`
+  font-family: ${fonts.family};
+  font-weight: ${fonts.weight.bold};
+  font-size: ${fonts.size.sm};
+  color: ${ORANGE};
+  margin: 0;
+`;
+
+const ReportCardDesc = styled.p`
+  font-family: ${fonts.family};
+  font-weight: ${fonts.weight.regular};
+  font-size: ${fonts.size.sm};
+  line-height: 20px;
+  color: ${ORANGE_DARK};
   margin: 0;
 `;
 
@@ -914,6 +952,8 @@ const UserInfoRole = styled.p`
 
 const PopupChatScreen = () => {
   const [selectedUser, setSelectedUser] = useState(null);
+  const [signToggle, setSignToggle] = useState(false);
+  const [readToggle, setReadToggle] = useState(false);
 
   const handleUserClick = (user) => {
     setSelectedUser((prev) => (prev?.id === user.id ? null : user));
@@ -1044,41 +1084,74 @@ const PopupChatScreen = () => {
           <RightPanel>
             {selectedUser ? (
               /* ChatRoomUserInfo — 유저 선택 시 */
-              <>
-                <PanelSection $center $gap="12px">
-                  <UserInfoAvatarBox $isIcon={selectedUser.iconProfile}>
+              <RightPanelScroll>
+                <UserInfoTopSection>
+                  <UserInfoSectionHeader>
+                    <UserInfoSectionTitle>유저 정보</UserInfoSectionTitle>
+                    <Divider />
+                  </UserInfoSectionHeader>
+                  <UserBigAvatarBox $isIcon={selectedUser.iconProfile}>
                     <img src={selectedUser.avatar} alt={selectedUser.name} />
-                  </UserInfoAvatarBox>
-                  <UserInfoMeta>
-                    <UserInfoName>{selectedUser.name}</UserInfoName>
-                    <UserInfoBadgeRow>
-                      <LevelBadge>Lv.{selectedUser.level}</LevelBadge>
-                      <UserInfoRole>{selectedUser.role}</UserInfoRole>
-                    </UserInfoBadgeRow>
-                  </UserInfoMeta>
+                  </UserBigAvatarBox>
+                  <UserInfoName>{selectedUser.name}</UserInfoName>
+                  <LevelRoleBadge>
+                    Lv.{selectedUser.level} · {selectedUser.role}
+                  </LevelRoleBadge>
+                  <OutlineButton
+                    borderColor={colors.primary}
+                    textColor={colors.primary}
+                    padding="10px 16px"
+                  >
+                    + 팔로우
+                  </OutlineButton>
+                  <OutlineButton
+                    bgColor={colors.primary}
+                    borderColor={colors.primary}
+                    textColor={colors.textWhite}
+                    padding="10px 16px"
+                  >
+                    1:1 채팅 시작
+                  </OutlineButton>
+                </UserInfoTopSection>
+                <PanelSection>
+                  <SectionLabel>유저 프로필 이동</SectionLabel>
+                  <ActionDescText>해당 유저의 프로필로 이동합니다.</ActionDescText>
+                  <OutlineButton borderColor={colors.live} textColor={colors.live}>
+                    유저 프로필로 이동
+                  </OutlineButton>
                 </PanelSection>
-                <PanelSection $flex="1">
-                  <SectionLabel>활동 정보</SectionLabel>
-                  <StatsRow>
-                    <StatItem>
-                      <StatValue>00개</StatValue>
-                      <StatLabel>오늘 메세지</StatLabel>
-                    </StatItem>
-                    <StatItem>
-                      <StatValue>00일</StatValue>
-                      <StatLabel>참여기간</StatLabel>
-                    </StatItem>
-                  </StatsRow>
-                </PanelSection>
-                <LastSection>
-                  <PanelBtn onClick={() => setSelectedUser(null)}>
+                <PanelSection>
+                  <SectionLabel>채팅방 프로필로 되돌아가기</SectionLabel>
+                  <ActionDescText>
+                    해당 유저 정보 열람을 종료 후 다시 채팅방 프로필 내용으로 돌아갑니다
+                  </ActionDescText>
+                  <OutlineButton
+                    borderColor={colors.danger}
+                    textColor={colors.danger}
+                    onClick={() => setSelectedUser(null)}
+                  >
                     유저 정보 열람 종료
-                  </PanelBtn>
-                </LastSection>
-              </>
+                  </OutlineButton>
+                </PanelSection>
+                <PanelSection $last>
+                  <ReportCard>
+                    <ReportCardTitle>⚠️ 신고 및 차단</ReportCardTitle>
+                    <ReportCardDesc>
+                      부적절한 활동이 확인되면 신고해 주세요. 운영팀이 검토합니다.
+                    </ReportCardDesc>
+                  </ReportCard>
+                  <OutlineButton borderColor={ORANGE} textColor={ORANGE}>
+                    이 유저 신고하기
+                  </OutlineButton>
+                  <OutlineButton borderColor={colors.border} textColor={colors.textSub}>
+                    이 유저 차단하기
+                  </OutlineButton>
+                </PanelSection>
+              </RightPanelScroll>
             ) : (
-              /* 채팅방 기본 정보 패널 */
-              <>
+              /* 채팅방 기본 정보 패널 — 높이 초과 시 스크롤 */
+              <RightPanelScroll>
+                {/* 채팅방 프로필 */}
                 <PanelSection $center $gap="12px">
                   <RoomProfileImg>
                     <img src={assets.roomProfile} alt="채팅방" />
@@ -1094,6 +1167,8 @@ const PopupChatScreen = () => {
                     </StatusRow>
                   </RoomTitleCenter>
                 </PanelSection>
+
+                {/* 채팅방 소개 */}
                 <PanelSection>
                   <SectionLabel>채팅방 소개</SectionLabel>
                   <IntroText>
@@ -1102,6 +1177,8 @@ const PopupChatScreen = () => {
                     <p>서로 격려하며 함께 배워요 🌱</p>
                   </IntroText>
                 </PanelSection>
+
+                {/* 태그 */}
                 <PanelSection $gap="9px">
                   <SectionLabel>태그</SectionLabel>
                   <TagGrid>
@@ -1112,33 +1189,60 @@ const PopupChatScreen = () => {
                     ))}
                   </TagGrid>
                 </PanelSection>
-                <PanelSection $flex="1">
-                  <SectionLabel>통계</SectionLabel>
-                  <StatsRow>
-                    <StatItem>
-                      <StatValue>00명</StatValue>
-                      <StatLabel>현재인원</StatLabel>
-                    </StatItem>
-                    <StatItem>
-                      <StatValue>00개</StatValue>
-                      <StatLabel>오늘 메세지</StatLabel>
-                    </StatItem>
-                  </StatsRow>
-                  <StatsRow>
-                    <StatItem>
-                      <StatValue>0.0점</StatValue>
-                      <StatLabel>평점</StatLabel>
-                    </StatItem>
-                    <StatItem>
-                      <StatValue>00일</StatValue>
-                      <StatLabel>운영기간</StatLabel>
-                    </StatItem>
-                  </StatsRow>
+
+                {/* 접근성 도구 */}
+                <PanelSection $gap="8px">
+                  <SectionLabel>접근성 도구</SectionLabel>
+                  <AccessRow>
+                    <AccessLabel>수어 자동 변환</AccessLabel>
+                    <ToggleSwitch
+                      checked={signToggle}
+                      onChange={() => setSignToggle((v) => !v)}
+                      activeColor={colors.accessibilitySign}
+                    />
+                  </AccessRow>
+                  <AccessRow>
+                    <AccessLabel>메세지 읽어주기</AccessLabel>
+                    <ToggleSwitch
+                      checked={readToggle}
+                      onChange={() => setReadToggle((v) => !v)}
+                      activeColor={colors.accessibilityRead}
+                    />
+                  </AccessRow>
                 </PanelSection>
-                <LastSection>
-                  <PanelBtn>채팅방 공유</PanelBtn>
-                </LastSection>
-              </>
+
+                {/* 채팅방 공유 / 나가기 */}
+                <PanelSection $gap="8px">
+                  <OutlineButton
+                    borderColor={colors.border}
+                    textColor={colors.textSub}
+                  >
+                    채팅방 공유
+                  </OutlineButton>
+                  <OutlineButton
+                    borderColor={colors.live}
+                    textColor={colors.live}
+                  >
+                    채팅방 나가기
+                  </OutlineButton>
+                </PanelSection>
+
+                {/* 채팅방 신고 */}
+                <PanelSection $gap="8px" $last>
+                  <SectionLabel>채팅방 신고</SectionLabel>
+                  <IntroText>
+                    <p>만약 해당 채팅방에서 부적절한 행위</p>
+                    <p>혹은 대화가 발생한다면 아래의</p>
+                    <p>신고하기 버튼으로 신고 가능합니다.</p>
+                  </IntroText>
+                  <OutlineButton
+                    borderColor={colors.danger}
+                    textColor={colors.danger}
+                  >
+                    채팅방신고
+                  </OutlineButton>
+                </PanelSection>
+              </RightPanelScroll>
             )}
           </RightPanel>
         </Body>
